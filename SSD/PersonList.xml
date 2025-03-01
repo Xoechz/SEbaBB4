@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE PersonList [
+<!ELEMENT PersonList (Person*)>
+<!ELEMENT Person (#PCDATA)>
+
+<!ATTLIST Person
+born CDATA #IMPLIED
+id ID #REQUIRED
+married_with IDREF #IMPLIED>
+]>
+<PersonList>
+	<Person born="1990-05-01" id="ssn_1" married_with="ssn_2">Hubert Maier</Person>
+		<Person born="1990-05-01" id="ssn_2" married_with="ssn_1">Maria Maier</Person>
+		<Person born="1990-05-01" id="ssn_3">Sepp Hofer</Person>
+
+<!--
+		<BirthDate year="1990" month="05" day="01"/>
+	-->
+</PersonList>

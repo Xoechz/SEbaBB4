@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ENTITY % PossiblePersonAttributeExtension "">
+<!ENTITY % PersonAttributes "
+born CDATA #IMPLIED
+id ID #REQUIRED
+married_with IDREF #IMPLIED
+gender (male|female|divers) #IMPLIED
+%PossiblePersonAttributeExtension;
+">
+<!ENTITY % PersonType "(FirstName, LastName)">
+<!ELEMENT Person %PersonType;>
+<!ATTLIST Person
+%PersonAttributes;>
+<!ELEMENT Student %PersonType;>
+<!ATTLIST Student
+%PersonAttributes;>
+<!ELEMENT FirstName (#PCDATA)>
+<!ELEMENT LastName (#PCDATA)>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE PersonList SYSTEM "PersonListEntities.dtd" [
+	<!ENTITY % PossiblePersonAttributeExtension "
+has_children (yes|no) #IMPLIED
+fixed_value CDATA #FIXED 'wert'
+default_value CDATA 'dev'
+"> 
+	<!ENTITY % PersonType "(FirstName, MiddleName?, LastName)"> 
+	<!ELEMENT MiddleName (#PCDATA)> 
+	
+	<!ENTITY SomePersons SYSTEM "PersonHelmutBerger.xml">
+]>
+<PersonList>
+	<Person born="1990-05-01" id="ssn_1" married_with="ssn_2" has_children="yes">
+		<FirstName>Hubert</FirstName>
+		<LastName>Maier</LastName>
+	</Person>
+	<Person born="1990-05-01" id="ssn_2" married_with="ssn_1" default_value="a">
+		<FirstName>Maria</FirstName>
+		<LastName>Maier</LastName>
+	</Person>
+	<Person born="1990-05-01" id="ssn_3">
+		<FirstName>Sepp</FirstName>
+		<MiddleName>Erik</MiddleName>
+		<LastName>Hofer</LastName>
+	</Person>
+	<!--
+		<BirthDate year="1990" month="05" day="01"/>
+	-->
+	<Student born="1990-05-01" id="ssn_4" married_with="ssn_3" has_children="yes">
+		<FirstName>Karl</FirstName>
+		<LastName>Berger</LastName>
+	</Student>
+	&SomePersons;
+</PersonList>

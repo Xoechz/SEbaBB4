@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT PersonList (Person*)>
+<!ELEMENT Person (#PCDATA)>
+
+<!ENTITY % PossiblePersonAttributeExtension "">
+
+<!ATTLIST Person
+born CDATA #IMPLIED
+id ID #REQUIRED
+married_with IDREF #IMPLIED
+gender (male|female|divers) #IMPLIED
+%PossiblePersonAttributeExtension;
+>
