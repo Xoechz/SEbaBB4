@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Rezept SYSTEM "Rezept.dtd">
+<Rezept portionen=6 autor="Maria">
+    <Titel>Marias Palatschinken</Title>
+    <Zutaten>
+        <Zutat menge="1" einheit="Prise" zutatId="z001">Salz</Zutat>
+        <Zutat zutatId="z002">Marmelade nach Belieben</Zutat>
+        <Zutat menge="250" einheit="g" zutatId="z003">Mehl</Zutat>
+        <Zutat menge="2" einheit="Stk" zutatId="z004">Eier</Zutat>
+        <Zutat menge="0.5" einheit="l" zutatId="z005">Milch</Zutat>
+        <Zutat zutatId="z006">Butter zum Herausbacken</Zutat>
+    </Zutaten>
+    <Zubereitung dauer="10" einheit="min">
+        <Schritt nummer="1">
+            <ZutatRef zutatId="z003">Mehl</ZutatRef>,                 
+            <ZutatRef zutatId="z005">Milch</ZutatRef>, 
+            <ZutatRef zutatId="z004">Eier<ZutatRef</ZutatRef>, 
+            zutatId="z001">Salz</ZutatRef> 
+             mit dem Schneebesen in einer Schüssel glatt rühren. 
+        </Schritt>
+        <Schritt nummer="2">Teig ca. 10 min stehen lassen.</Schritt>
+        <Schritt nummer="3">Butter in Pfanne erhitzen</Schritt>
+        <Schritt nummer="4">Einen Schöpfer Teig in die heiße Pfanne geben.</Schritt>
+        <Schritt nummer="5">Palatschinke von beiden Seiten golden herausbacken.</Schritt>
+        <Schritt>Palatschinke mit Marmelade bestreichen und zusammenrollen.</Schritt>
+    </Zubereitung>
+    <Zubereitung dauer="5" einheit="min">
+        <Schritt nummer="1">Servieren</Schritt>
+    </Zubereitung>
+</Rezept>
