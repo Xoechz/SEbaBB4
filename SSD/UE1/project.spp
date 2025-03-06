@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project>
+	<Folder FolderName="XML Files" ExtStr="xml;cml;math;rdf;smil;svg;wml">
+		<File FilePath="Fitnessdokument.xml" HomeFolder="Yes"/>
+		<File FilePath="HUE01_Angabe_wohlgeformt.xml" HomeFolder="Yes"/>
+		<File FilePath="HUE1_Angabe.xml" HomeFolder="Yes"/>
+		<File FilePath="rezept.xml" HomeFolder="Yes"/>
+		<File FilePath="rezept_valid.xml" HomeFolder="Yes"/>
+	</Folder>
+	<Folder FolderName="XSL Files" ExtStr="xsl;xslt"/>
+	<Folder FolderName="XQuery Files" ExtStr="xq;xql;xquery;xqu"/>
+	<Folder FolderName="HTML Files" ExtStr="html;htm;xhtml;asp"/>
+	<Folder FolderName="DTD/Schemas" ExtStr="dtd;dcd;xdr;biz;xsd">
+		<File FilePath="Fitnessdokument.dtd" HomeFolder="Yes"/>
+		<File FilePath="rezept.dtd" HomeFolder="Yes"/>
+	</Folder>
+	<Folder FolderName="Entities" ExtStr="ent"/>
+</Project>

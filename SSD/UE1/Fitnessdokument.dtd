@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT VitalityData (Patient, (BloodPressure | Weight | Steps | BloodSugar)+, Limit*, (BloodPressureDevice | Scale | FitnessTracker | BloodSugarDevice)+, Medication*)>
+<!ATTLIST VitalityData
+time CDATA #REQUIRED
+version CDATA #REQUIRED>
+
+<!ELEMENT Patient EMPTY>
+<!ATTLIST Patient                     
+	firstname	CDATA	#REQUIRED
+	lastname	CDATA	#REQUIRED
+	born		CDATA	#REQUIRED
+	gender		(m|f|d)	#REQUIRED
+	svnr		ID		#REQUIRED
+	pretitle	CDATA	#IMPLIED
+	posttitle	CDATA	#IMPLIED
+>
+
+<!ENTITY % MeasurementAttributes "
+time CDATA #REQUIRED
+device IDREF #REQUIRED
+note CDATA #IMPLIED
+condition CDATA #IMPLIED
+limit IDREF #IMPLIED
+">
+<!ELEMENT BloodPressure (Systolic, Diastolic, Pulse)>
+<!ATTLIST BloodPressure
+%MeasurementAttributes;>
+<!ELEMENT Weight (WeightValue)>
+<!ATTLIST Weight
+%MeasurementAttributes;>
+<!ELEMENT Steps (StepCount)>
+<!ATTLIST Steps
+%MeasurementAttributes;>
+<!ELEMENT BloodSugar (BloodSugarValue)>
+<!ATTLIST BloodSugar
+%MeasurementAttributes;>
+
+<!ENTITY % MeasurementValueType "(#PCDATA)">
+<!ENTITY % MeasurementValueAttributes "
+unit CDATA #REQUIRED
+">
+<!ELEMENT Systolic %MeasurementValueType;>
+<!ATTLIST Systolic
+%MeasurementValueAttributes;>
+<!ELEMENT Diastolic %MeasurementValueType;>
+<!ATTLIST Diastolic
+%MeasurementValueAttributes;>
+<!ELEMENT Pulse %MeasurementValueType;>
+<!ATTLIST Pulse
+%MeasurementValueAttributes;>
+<!ELEMENT WeightValue %MeasurementValueType;>
+<!ATTLIST WeightValue
+%MeasurementValueAttributes;>
+<!ELEMENT StepCount %MeasurementValueType;>
+<!ATTLIST StepCount
+%MeasurementValueAttributes;>
+<!ELEMENT BloodSugarValue %MeasurementValueType;>
+<!ATTLIST BloodSugarValue
+%MeasurementValueAttributes;>
+
+<!ELEMENT Limit EMPTY>
+<!ATTLIST Limit                  
+	id			ID		#REQUIRED
+	validfrom	CDATA	#REQUIRED
+	validto		CDATA	#REQUIRED
+	unit		CDATA	#REQUIRED
+	lowerbound	CDATA	#REQUIRED
+	upperbound	CDATA	#REQUIRED
+>
+
+<!ENTITY % DeviceAttributes "
+serialnumber ID #REQUIRED
+manufacturer CDATA #REQUIRED
+modelnumber CDATA #REQUIRED
+">
+<!ELEMENT BloodPressureDevice EMPTY>
+<!ATTLIST BloodPressureDevice
+%DeviceAttributes;>
+<!ELEMENT Scale EMPTY>
+<!ATTLIST Scale
+%DeviceAttributes;>
+<!ELEMENT FitnessTracker EMPTY>
+<!ATTLIST FitnessTracker
+%DeviceAttributes;>
+<!ELEMENT BloodSugarDevice EMPTY>
+<!ATTLIST BloodSugarDevice
+%DeviceAttributes;>
+
+<!ELEMENT Medication EMPTY>
+<!ATTLIST Medication                     
+	name		CDATA	#REQUIRED
+	intake		CDATA	#REQUIRED
+	dose		CDATA	#IMPLIED
+	note		CDATA	#IMPLIED
+	start		CDATA	#IMPLIED
+	end			CDATA	#IMPLIED
+	application	CDATA	#REQUIRED
+>

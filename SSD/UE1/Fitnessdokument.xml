@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE VitalityData SYSTEM "Fitnessdokument.dtd">
+<VitalityData time="2025-03-01T08:13" version="4">
+	<Patient firstname="Anton" lastname="Vitafit" born="1956-08-24" gender="m" svnr="s8567240856" pretitle="Prof. Dr." posttitle="BSc, MSc"/>
+	<BloodPressure time="2025-01-28T07:55:42" device="d51204_00454" note="Maschinell">
+		<Systolic unit="mmHg">121.0</Systolic>
+		<Diastolic unit="mmHg">70.0</Diastolic>
+		<Pulse unit="Schläge/min">79.0</Pulse>
+	</BloodPressure>
+	<BloodPressure time="2025-01-27T07:48:28" device="d51204_00454" note="Maschinell">
+		<Systolic unit="mmHg">115.0</Systolic>
+		<Diastolic unit="mmHg">67.0</Diastolic>
+		<Pulse unit="Schläge/min">79.0</Pulse>
+	</BloodPressure>
+	<BloodPressure time="2025-01-21T08:23:48" device="d51204_00454" note="Maschinell">
+		<Systolic unit="mmHg">139.0</Systolic>
+		<Diastolic unit="mmHg">73.0</Diastolic>
+		<Pulse unit="Schläge/min">81.0</Pulse>
+	</BloodPressure>
+	<Weight time="2025-01-28T08:45:29" device="d40355_42306255" note="Maschinell">
+		<WeightValue unit="kg">80.6</WeightValue>
+	</Weight>
+	<Weight time="2025-01-27T07:50:03" device="d40355_42306255" note="Maschinell">
+		<WeightValue unit="kg">80.6</WeightValue>
+	</Weight>
+	<Weight time="2025-01-22T09:06:51" device="d40355_42306255" note="Maschinell">
+		<WeightValue unit="kg">80.6</WeightValue>
+	</Weight>
+	<Weight time="2025-01-21T08:24:39" device="d40355_42306255" note="Maschinell">
+		<WeightValue unit="kg">80.6</WeightValue>
+	</Weight>
+	<Steps time="2025-01-28T00:00:00" device="d73539_012302">
+		<StepCount unit="pro Tag">9800</StepCount>
+	</Steps>
+	<Steps time="2025-01-23T00:00:00" device="d73539_012302">
+		<StepCount unit="pro Tag">10005</StepCount>
+	</Steps>
+	<Steps time="2025-01-21T00:00:00" device="d3F7019550">
+		<StepCount unit="pro Tag">7420</StepCount>
+	</Steps>
+	<Steps time="2025-01-20T00:00:00" device="d3F7019550">
+		<StepCount unit="pro Tag">6320</StepCount>
+	</Steps>
+	<BloodSugar time="2025-01-28T08:44:47" device="d12231_23128829" condition="nach dem Essen" limit="l1">
+		<BloodSugarValue unit="mg/dl">155.5</BloodSugarValue>
+	</BloodSugar>
+	<BloodSugar time="2025-01-27T07:49:13" device="d12231_23128829" condition="nach dem Essen" limit="l1">
+		<BloodSugarValue unit="mg/dl">201.5</BloodSugarValue>
+	</BloodSugar>
+	<BloodSugar time="2025-01-26T16:25:44" device="d12231_23128829" condition="nach dem Essen" limit="l1">
+		<BloodSugarValue unit="mg/dl">190.0</BloodSugarValue>
+	</BloodSugar>
+	<BloodSugar time="2025-01-23T07:41:26" device="d12231_23128829" condition="nach dem Essen" limit="l1">
+		<BloodSugarValue unit="mg/dl">184.5</BloodSugarValue>
+	</BloodSugar>
+	<Limit id="l1" validfrom="2025-01-01" validto="2025-01-28" unit="mg/dl" lowerbound="80" upperbound="160"/>
+	<BloodPressureDevice serialnumber="d51204_00454" manufacturer="A/D Medical" modelnumber="UA-767NFC"/>
+	<Scale serialnumber="d40355_42306255" manufacturer="Wahoo Fitness" modelnumber="WFBTScalev1"/>
+	<FitnessTracker serialnumber="d73539_012302" manufacturer="Polar" modelnumber="loop-90047656"/>
+	<FitnessTracker serialnumber="d3F7019550" manufacturer="Garmin" modelnumber="vivofit"/>
+	<BloodSugarDevice serialnumber="d12231_23128829" manufacturer="Aktivmed" modelnumber="GlucoCheckXL"/>
+	<Medication name="Diazepam Actavis 10 mg Tabletten" intake="täglich" dose="1-0-1-0" start="2022-02.24" end="2022-03-14" application="zum Einnehmen"/>
+	<Medication name="Zithromax 500 mg Filmtabl." intake="täglich" dose="1-0-0-0" note="vor dem Frühstücl" application="zum Einnehmen"/>
+	<Medication name="Nasivin 0,05 % - Nasentropfen" intake="täglich" note="3 x 2 Tropfen" application="Nasal"/>
+	<Medication name="Seractil" intake="bei Bedarf" dose="1-1-1-0" application="zum Einnehmen"/>
+</VitalityData>
