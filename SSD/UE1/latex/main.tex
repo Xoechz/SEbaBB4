@@ -61,7 +61,7 @@
 	\begin{scope}[shift={(current page.south west)},every node/.style={anchor=base west}]
 		\node at (1.87cm, 25.75cm) {X};
 		\node at (8.0cm, 25.8cm) {\theauthor};
-		\node at (17.7cm, 25.8cm) {2};
+		\node at (17.7cm, 25.8cm) {3,5};
 	\end{scope}
 \end{tikzpicture}
 
@@ -71,5 +71,84 @@
 \tableofcontents
 
 \pagebreak
+
+\section{Wohlgeformtheit von XML-Dokumenten}
+
+Um die Wohlgeformtheit vom XML-Dokument herzustellen, wurden alle \& durch \&amp; ersetzt,
+der Kommentar am Anfang wurde ausgebessert, da doppelte Bindestriche nicht erlaubt ist,
+Tagnamen wurden angepasst, damit sie nicht mit Zahlen beginnen,
+doppelte Attribute wurden zu Kindknoten umgewandelt und
+fehlerhafte Hochkomma wurden angepasst.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{../1_1_1.png}
+	\caption{Kommentar am Anfang ausgebessert}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{../1_1_2.png}
+	\caption{Tagnamen mit Zahlen angepasst}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{../1_1_3.png}
+	\caption{Doppelte Attribute zu Kindknoten umgewandelt}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{../1_1_4.png}
+	\caption{\& durch \&amp; ersetzt}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{../1_1_5.png}
+	\caption{Fehlerhafte Hochkomma angepasst}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{../1_1_6.png}
+	\caption{Ausgabe von XMLSpy}
+\end{figure}
+
+\pagebreak
+
+\section{Validieren von XML-Dokumenten}
+
+Um die Validität des Dokumentes herzustellen, wurden nicht erlaubte Attribute entfernt,
+Tags zur Wohlgeformtheit angepasst und
+die Zubereitungs Elemente zusammengefasst, da nur ein solches Element erlaubt ist.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{../1_2_1.png}
+	\caption{Vergleich der 2 Dokumente}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{../1_2_2.png}
+	\caption{Ausgabe von XMLSpy}
+\end{figure}
+
+\pagebreak
+
+\section{Erstellen einer DTD inkl. eines XML-Dokuments}
+
+Das XML Dokument wurde auf Basis der Anforderungen und des Beispiels erstellt. Die DTD dann auf Basis des XML Dokumentes.\par
+
+Bei beiden Dokumenten wurden möglich konkrete Elemente verwendet.\par
+
+Am Ende wertete XMLSpy das XML-Dokument als valide aus.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{../1_3.png}
+	\caption{Ausgabe von XMLSpy}
+\end{figure}
+
+\subsection{XML Dokument}
+\inputminted{xml}{../Fitnessdokument.xml}
+
+\subsection{DTD}
+\inputminted{xml}{../Fitnessdokument.dtd}
 
 \end{document}

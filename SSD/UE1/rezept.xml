@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE Rezept SYSTEM "Rezept.dtd">
+<!DOCTYPE Rezept SYSTEM "rezept.dtd">
 <Rezept portionen=6 autor="Maria">
     <Titel>Marias Palatschinken</Title>
     <Zutaten>
