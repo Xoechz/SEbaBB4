@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# This script is a wrapper for the ddev php command, so vscode can use it as a php interpreter
+# This is required if you want to use the php intellisense in vscode
+cd "$(dirname "$0")"
+path=$(printf '%s\n' "${PWD##*/}")
+command="ddev php "$@""
+$command

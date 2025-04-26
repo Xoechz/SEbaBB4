@@ -1,0 +1,20 @@
+<project name="Hello">
+    <target name="compile">
+        <javac srcdir="." destdir="bin">
+            <include name="**/*.java" />
+        </javac>
+    </target>
+
+    <target name="run" depends="compile">
+        <java className="JavaTest" classPath="bin" />
+    </target>
+
+    <target name="jar" depends="compile">
+        <jar destfile="JavaTest.jar" basedir="bin">
+            <fileset dir="bin" includes="**/*.class" />
+            <manifest>
+                <attribute name="Main-Class" value="JavaTest" />
+            </manifest>
+        </jar>
+    </target>
+</project>
