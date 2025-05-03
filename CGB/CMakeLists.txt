@@ -42,11 +42,11 @@ function(target name)
          -Werror=vla                         # disable support for VLAs
          #-O3                                # enable level 3 optimization
          -Og                                 # enable debugging optimization
-         -g                                  # enable debugging information
-         -fsanitize=address,undefined,leak   # enable address, undefined behavior and memory leak sanitizers
-      )
-      target_link_libraries(${name} PRIVATE
-         -fsanitize=address,undefined,leak   # enable address, undefined behavior and memory leak sanitizers
+          -g                                  # enable debugging information
+      #    -fsanitize=address,undefined,leak   # enable address, undefined behavior and memory leak sanitizers
+      # )
+      # target_link_libraries(${name} PRIVATE
+      #    -fsanitize=address,undefined,leak   # enable address, undefined behavior and memory leak sanitizers
       )
       # openGl
       target_link_libraries(${name} PRIVATE ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} GLU)
@@ -67,3 +67,5 @@ endfunction()
 target(abgr demo/abgr.c)
 target(ue1 ue1/main.cpp)
 target(ue2 ue2/main.cpp)
+target(ue3 ue3/main.cpp)
+target(ue4 ue4/main.cpp)
