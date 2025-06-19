@@ -1,0 +1,440 @@
+\documentclass[12pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[naustrian]{babel}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{subcaption}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{listings}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{xcolor}
+
+%pdfs
+\usepackage{pdfpages}
+
+%page borders
+\usepackage{geometry}
+\geometry{left=2.5cm,right=2.5cm,top=3cm,bottom=2.5cm}
+
+\usepackage{minted}
+\setminted {
+	%style=igor, %borland, autumn, vs
+	encoding=utf-8,
+	autogobble,
+	tabsize=4,
+	linenos,
+	breaklines,
+	keywordcase=upper,
+	%escapeinside=||
+	%bgcolor=bg
+	frame=single
+}
+
+\newenvironment{code}{\captionsetup{type=listing}}{}
+
+%title/footer/header values
+\usepackage{titling}
+\title{AMS4 Cheetsheet}
+\author{Elias Leonhardsberger}
+\date{\today{}, Hagenberg}
+
+%footer/header
+%\usepackage[automark]{scrpage2}
+%\pagestyle{headings}
+%\clearscrheadfoot
+%\ihead{\thetitle}
+%\chead{\theauthor}
+%\ohead{\today}
+%\cfoot{Seite \pagemark}
+
+\definecolor{aStarRed}{HTML}{fc6767}
+
+\begin{document}
+\section{Definitionen}
+\begin{tabular}{ c | c | c }
+    \textbf{Begriff}      & \textbf{Math. Def.}             & \textbf{Text Def.}                     \\
+    \hline
+    \textbf{Graph}        & $G = (V, E)$                    & Menge von Knoten $V$ und Kanten $E$    \\
+    \hline
+    \textbf{ungerichtet}  & $e = \{u, v\} \in E$            & Kanten verbinden Knoten ohne Richtung  \\
+    \hline
+    \textbf{gerichtet}    & $e = (u, v) \in E$              & Kanten verbinden Knoten mit Richtung   \\
+    \hline
+    \textbf{zusammen-}    & $G$ ist zusammenhängend         & Es gibt einen Pfad zwischen allen      \\
+    \textbf{hängend}      &                                 & Knoten im Graphen $G$                  \\
+    \hline
+                          &                                 & Zwei Graphen sind isomorph, wenn es    \\
+    \textbf{isomorph}     & $G_1 \cong G_2$                 & eine bijektive Abbildung zwischen      \\
+                          &                                 & ihren Knoten gibt.                     \\
+    \textbf{Brücke}       & $e \in E$ ist eine Brücke       & Entfernen von $e$ trennt den Graphen   \\
+    \hline
+    \textbf{Wanderung}    & $W = (v_1, v_2, \ldots, v_n)$   & Folge von Knoten,                      \\
+                          &                                 & die durch Kanten verbunden sind        \\
+    \hline
+    \textbf{Weg}          & $P = (v_1, v_2, \ldots, v_n)$   & Wanderung ohne Kantenwiederholung      \\
+    \hline
+    \textbf{Pfad}         & $P = (v_1, v_2, \ldots, v_n)$   & Weg ohne Knotenwiederholung            \\
+    \hline
+    \textbf{Kreis}        & $C = (v_1, v_2, \ldots, v_n)$   & Weg, der am Startknoten endet          \\
+                          &                                 &                                        \\
+    \hline
+    \textbf{Hamiltonpfad} & $P = (v_1, v_2, \ldots, v_n)$   & Pfad, der alle Knoten genau einmal     \\
+                          &                                 & besucht                                \\
+    \hline
+    \textbf{Eulerpfad}    & $P = (v_1, v_2, \ldots, v_n)$   & Weg, der alle Kanten genau einmal      \\
+                          &                                 & besucht                                \\
+    \hline
+    \textbf{Eulerkreis}   & $C = (v_1, v_2, \ldots, v_n)$   & Kreis, der alle Kanten genau einmal    \\
+                          &                                 & besucht                                \\
+    \hline
+    \textbf{Handshaking}  & $\sum_{v \in V} \deg(v) = 2|E|$ & Summe der Grade aller Knoten ist       \\
+    \textbf{Lemma}        &                                 & gleich der doppelten Anzahl der Kanten \\
+    \hline
+                          & $V = V_1 \cup V_2$              & Knotenmenge in zwei disjunkte Mengen   \\
+    \textbf{bipartit}     & $E \subseteq V_1 \times V_2$    & Kanten verbinden nur Knoten aus        \\
+                          &                                 & verschiedenen Mengen                   \\
+    \hline
+    \textbf{Wald}         & $G = (V, E)$                    & Graph ohne Zyklen                      \\
+    \hline
+    \textbf{Baum}         & $G = (V, E)$                    & Zusammenhängender, azyklischer Graph.  \\
+                          & $|E| = |V| - 1$                 &                                        \\
+    \hline
+    \textbf{MST}          & $T = (V, E')$                   & Minimaler Spannbaum eines Graphen $G$  \\
+                          &                                 & beinhaltet alle Knoten von $G$         \\
+    \hline
+    \textbf{Fluss-}       &                                 & Netzwerk $N$ mit Graph $G$             \\
+    \textbf{netzwerk}     & $N = (G, w, s, t)$              & Kapazitätsfunktion $w$, Startknoten    \\
+                          &                                 & $s$ und Zielknoten $t$                 \\
+\end{tabular}
+\pagebreak
+\section{Algorithmen}
+\begin{algorithm}
+    \caption{Fleury}
+    \begin{algorithmic}
+        \Require Graph $G = (V, E)$
+        \Ensure Graph ist zusammenhängend und hat entweder 0 oder 2 Knoten mit ungeradem Grad
+        \State $C \gets \emptyset$ \Comment{Kreis}
+        \State $v \gets getAnyNodeWithOddDegreeOrAnyNode(G)$ \Comment{Startknoten}
+        \While{$E \neq \emptyset$}
+        \State $e \gets getNeighboringNonBridge(v, E)$
+        \If{$e = not found$}
+        \State $e \gets getAnyNeighboringEdge(v, E)$
+        \EndIf
+        \If{$e = not found$}
+        \State \Return C \Comment{Error: Kein Kreis gefunden}
+        \EndIf
+        \State $C \gets C \cup \{e\}$ \Comment{Füge Kante zum Kreis hinzu}
+        \State $E \gets E \setminus \{e\}$ \Comment{Entferne Kante aus dem Graphen}
+        \State $v \gets getOtherNode(e, v)$ \Comment{Wechsel zum anderen Knoten der Kante}
+        \EndWhile
+        \State \Return C \Comment{Gibt den Kreis zurück}
+    \end{algorithmic}
+\end{algorithm}
+
+\pagebreak
+
+\begin{algorithm}
+    \caption{\fcolorbox{black}{yellow}{Bellman-Moore-Ford}, \fcolorbox{black}{cyan}{Dijkstra}, \fcolorbox{black}{aStarRed}{A*}}
+    \begin{algorithmic}
+        \Require Graph $G = (V, E)$, ein Startknoten $s$, ein Zielknoten $t$
+        \Ensure Graph ist gewichtet, zusammenhängend und hat keine negativen Zyklen
+        \Require \fcolorbox{black}{aStarRed}{A* benötigt eine Heuristik für die Abschätzung der Distanz.}
+        \Ensure \fcolorbox{black}{aStarRed}{Die Heuristik muss monoton und optimistisch sein.($h(v) \leq dist(v, t)$)}
+
+        \State $dist(s) \gets 0$ \Comment{Abstand vom Startknoten}
+        \State $W(s) \gets \{s\}$ \Comment{Weg vom Startknoten}
+        \State \fcolorbox{black}{magenta}{$F \gets \emptyset$} \Comment{Nur in Dijkstra und A*}
+        \ForAll{$v \in V \setminus \{s\}$}
+        \State $dist(v) \gets \infty$
+        \State $W(v) \gets \emptyset$
+        \EndFor
+
+        \State \fcolorbox{black}{yellow}{$push(stack, s)$} \Comment{Stack für Bellman-Moore-Ford}
+        \While{\fcolorbox{black}{yellow}{$stack \neq \emptyset$}} \Comment{In Dijkstra und A* ist die Bedingung \fcolorbox{black}{magenta}{$t \notin F$}}
+        \State \fcolorbox{black}{yellow}{$v^* \gets pop(stack)$} \Comment{Nur in Bellman-Moore-Ford}
+        \State \fcolorbox{black}{cyan}{$v^* \gets \arg\min_{v \in V} dist(v)$} \Comment{In Dijkstra}
+        \State \fcolorbox{black}{aStarRed}{$v^* \gets \arg\min_{v \in V} (dist(v) + h(v))$} \Comment{In A* mit Heuristik $h$}
+            \State \fcolorbox{black}{magenta}{$F \gets F \cup \{v^*\}$} \Comment{Nur in Dijkstra und A*}
+            \ForAll{$v \in N(v^*)$} \Comment{Gehe alle Nachbarn von $v^*$ durch}
+            \If{$dist(v^*) + l(v^*, v) < dist(v)$}
+            \State $dist(v) \gets dist(v^*) + l(v^*, v)$
+            \State $W(v) \gets W(v^*) \cup \{v\}$
+        \State \fcolorbox{black}{yellow}{$push(stack, v)$} \Comment{Nur in Bellman-Moore-Ford}
+        \EndIf
+        \EndFor
+        \EndWhile
+        \State \Return dist, W \Comment{dist enthält alle Abstände, W alle Wege. Man kann auch nur den Abstand zum Zielknoten $t$ zurückgeben oder nur die Wege, je nach Nutzung.}
+    \end{algorithmic}
+\end{algorithm}
+\pagebreak
+
+\begin{algorithm}
+    \caption{Prim}
+    \begin{algorithmic}
+        \Require Graph $G = (V, E)$, ein Wurzelknoten $r$
+        \Ensure Graph ist zusammenhängend, ungerichtet und gewichtet
+        \State $Q \gets V$
+        \ForAll{$u \in Q$}
+        \State $dist(u) \gets \infty$ \Comment{Abstand zur Wurzel}
+        \State $pred(u) \gets 0$ \Comment{Vorgängerknoten im MST}
+        \EndFor
+        \State dist(r) $\gets 0$
+        \While{$Q \neq \emptyset$}
+        \State $u \gets \arg\min_{v \in Q} dist(v)$ \Comment{Knoten mit minimalem Abstand}
+        \State $Q \gets Q \setminus \{u\}$
+        \ForAll{$v \in N(u)$} \Comment{Gehe alle Nachbarn von $u$ durch}
+        \If{$v \in Q \land l(u, v) < dist(v)$}
+        \State $dist(v) \gets l(u, v)$
+        \State $pred(v) \gets u$
+        \EndIf
+        \EndFor
+        \EndWhile
+    \end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+    \caption{Kruskal}
+    \begin{algorithmic}
+        \Require Graph $G = (V, E)$
+        \Ensure Graph ist zusammenhängend, ungerichtet und gewichtet
+        \State $E' \gets \emptyset$ \Comment{MST Kanten}
+        \State $L \gets sort(E)$ \Comment{Sortiere Kanten nach Gewicht}
+        \While{$L \neq \emptyset$}
+        \State $e \gets pop(L)$ \Comment{Nimm die leichteste Kante}
+        \If{$(V, E' \cup \{e\})$ hat keinen Kreis}
+        \State $E' \gets E' \cup \{e\}$ \Comment{Füge Kante zum MST hinzu}
+        \EndIf
+        \EndWhile
+        \State \Return $(V, E')$ \Comment{MST}
+    \end{algorithmic}
+\end{algorithm}
+
+\pagebreak
+
+\begin{algorithm}
+    \caption{Ford-Fulkerson}
+    \begin{algorithmic}
+        \Require Netzwerk $N = (G, w, s, t)$ mit Graph $G$, Kapazitätsfunktion $w$, Startknoten $s$ und Zielknoten $t$
+        \Ensure $N$ ist ein Flussnetzwerk
+        \State $f \gets 0$ \Comment{Aktueller Fluss}
+        \While{es gibt einen augmentierenden Pfad $p$ von $s$ nach $t$ in $G_f$}
+        \State $p \gets findAugmentingPath(s, t, G_f)$ \Comment{beliebiger augmentierenden Pfad}
+        \State $c \gets \min_{e \in p} (w(e))$ \Comment{Bestimme die Flusskapazität}
+        \State $f \gets f + c$
+        \ForAll{$e \in p$}
+        \State $w(e) \gets w(e) - c$
+        \State $f(e_{rev}) \gets f(e_{rev}) + c$ \Comment{Füge den Fluss in die Rückwärtskante ein}
+        \EndFor
+        \EndWhile
+        \State \Return f \Comment{Gibt den maximalen Fluss zurück}
+    \end{algorithmic}
+\end{algorithm}
+
+\section{Ausgewählte Theoriefragen}
+\pagebreak
+
+\begin{itemize}
+    \item \textbf{Welche Arten von Graphen kennen Sie?}
+          \begin{itemize}
+              \item Ungerichtete Graphen
+              \item Gerichtete Graphen
+              \item Gewichtete Graphen
+              \item Zusammenhängende Graphen
+              \item Azyklische Graphen (Wald)
+              \item Azyklische zusammenhängende Graphen (Bäume)
+              \item Bipartite Graphen
+              \item Isomorphe Graphen
+              \item Eulergraphen
+              \item Hamiltongraphen
+          \end{itemize}
+    \item \textbf{Welche verschiedenen Darstellungsformen von Graphen kennen Sie?}
+          \begin{itemize}
+              \item Adjazenzmatrix => $A_{ij} = 1$ oder $A_{ij} = Gewicht$ wenn Kante zwischen $i$ und $j$ existiert, sonst $0$
+              \item Adjazenzliste => Liste von Knoten, die jeweils ihre Nachbarn enthalten.
+              \item Kantenliste => Liste aller Kanten, z.B. ${(u, v), (v, w)}$
+          \end{itemize}
+    \item \textbf{Wie wird das Kantengewicht mathematisch definiert?}
+          \begin{itemize}
+              \item Das Kantengewicht ist eine Funktion $l: E \to \mathbb{R}$, die jedem Kantenpaar $(u, v)$ ein Gewicht zuordnet.
+              \item In gewichteten Graphen wird das Gewicht oft als Distanz oder Kosten interpretiert.
+          \end{itemize}
+    \item \textbf{Was ist Nachbarschaft in Graphen?}
+          \begin{itemize}
+              \item Die Nachbarschaft eines Knotens $v$ in einem Graphen $G = (V, E)$ ist die Menge aller Knoten, die direkt mit $v$ durch eine Kante verbunden sind.
+              \item In gerichteten Graphen gibt es auch eingehende und ausgehende Nachbarn:
+                    \begin{itemize}
+                        \item Eingehende Nachbarn: $N_{in}(v) = \{u \in V | (u, v) \in E\}$
+                        \item Ausgehende Nachbarn: $N_{out}(v) = \{u \in V | (v, u) \in E\}$
+                        \item Nachbarn: $N(v) = N_{in}(v) \cup N_{out}(v)$
+                    \end{itemize}
+          \end{itemize}
+    \item \textbf{Was ist ein regulärer Graph?}
+          \begin{itemize}
+              \item Ein regulärer Graph ist ein Graph, in dem alle Knoten den gleichen Grad haben.
+              \item Formal: Ein Graph $G$ ist $k$-regulär, wenn $\deg(v) = k$ für alle $v \in V$ gilt.
+              \item Beispiele:
+                    \begin{itemize}
+                        \item Ein 3-regulärer Graph hat für jeden Knoten genau 3 Nachbarn.
+                        \item Ein vollständiger Graph $K_n$ ist $(n-1)$-regulär, da jeder Knoten mit allen anderen Knoten verbunden ist.
+                    \end{itemize}
+          \end{itemize}
+          \pagebreak
+    \item \textbf{Wann ist ein Graph eulersch?}
+          \begin{itemize}
+              \item Ein Graph ist eulersch, wenn er einen Eulerpfad enthält, der alle Kanten genau einmal besucht.
+              \item Ein Graph ist eulersch, wenn er entweder:
+                    \begin{itemize}
+                        \item keinen Knoten mit ungeradem Grad hat (Eulerkreis) oder
+                        \item genau zwei Knoten mit ungeradem Grad hat (Eulerpfad).
+                    \end{itemize}
+          \end{itemize}
+    \item \textbf{Wann ist ein Graph hamiltonisch?}
+          \begin{itemize}
+              \item Ein Graph ist hamiltonisch, wenn er einen Hamiltonpfad enthält, der alle Knoten genau einmal besucht.
+              \item Ein Graph ist hamiltonisch, wenn er einen Hamiltonkreis enthält, der alle Knoten genau einmal besucht und am Startknoten endet.
+          \end{itemize}
+    \item \textbf{Gegeben ein beliebiger Graph G, ist es hier möglich einen Eulerkreis zu konstruieren?}
+          \begin{itemize}
+              \item Nein, nicht immer.
+              \item Ein Eulerkreis benötigt folgende Bedingungen:
+                    \begin{itemize}
+                        \item Der Graph muss zusammenhängend sein.
+                        \item Alle Knoten müssen einen geraden Grad haben.
+                    \end{itemize}
+          \end{itemize}
+    \item \textbf{Welche Algorithmen kennen Sie zur Berechnung von Eulerkreisen? Was sind die Unterschiede?}
+          \begin{itemize}
+              \item Fleury's Algorithmus:
+                    \begin{itemize}
+                        \item Geht Kanten durch und vermeidet Brücken, wenn möglich.
+                        \item Einfach zu implementieren, aber ineffizient für große Graphen.
+                    \end{itemize}
+              \item Hierholzer's Algorithmus:
+                    \begin{itemize}
+                        \item Baut den Eulerkreis rekursiv auf.
+                        \item Effizienter und schneller als Fleury's Algorithmus.
+                    \end{itemize}
+          \end{itemize}
+    \item \textbf{Diskutieren Sie die Euler- bzw. Hamiltoneigenschaft für vollständige Graphen $K_n$ mit $n > 3$!}
+          \begin{itemize}
+              \item Vollständige Graphen $K_n$ sind hamiltonisch und manchmal eulerisch für $n > 3$.
+              \item Euler: Jeder Knoten hat einen geraden Grad, falls $n$ ungerade ist(Kanten pro Knoten ist $n-1$).
+                    Wenn $n$ gerade ist, hat jeder Knoten einen ungeraden Grad und es gibt keinen Eulerkreis.
+              \item Hamilton: Jeder Knoten ist mit jedem anderen Knoten verbunden, was einen Hamiltonkreis ermöglicht.
+          \end{itemize}
+          \pagebreak
+    \item \textbf{Diskutieren Sie die Lösbarkeit des Eulerkreisproblems mit dem des Hamiltonkreisproblems!}
+          \begin{itemize}
+              \item Das Eulerkreisproblem ist in polynomialer Zeit lösbar, während das Hamiltonkreisproblem NP-vollständig ist.
+              \item Es gibt effiziente Algorithmen für spezielle Fälle des Eulerkreisproblems, während das Hamiltonkreisproblem in der Regel heuristische Ansätze erfordert.
+          \end{itemize}
+    \item \textbf{Wie lautet die Abbruchbedingung der bidirektionalen Suche?}
+          \begin{itemize}
+              \item Die na"ive Abbruchbedingung der bidirektionalen Suche ist erreicht, wenn die Suchfronten von Start- und Zielknoten sich treffen.
+              \item Das bedeutet, dass ein Pfad zwischen den beiden Knoten gefunden wurde.
+              \item
+          \end{itemize}
+    \item \textbf{In einem MST ist jede Verbindung die kürzeste Verbindung.}
+          \begin{itemize}
+              \item Falsch.
+              \item Ein MST minimiert die Summe der Kantengewichte, aber nicht unbedingt die einzelnen Punkt-zu-Punkt-Verbindungen.
+          \end{itemize}
+    \item \textbf{Ist der Spannbaum aus dem Dijkstra Algorithmus minimal?}
+          \begin{itemize}
+              \item Falsch.
+              \item Der Dijkstra-Algorithmus findet den kürzesten Pfad von einem Startknoten zu allen anderen Knoten, aber der resultierende Baum ist nicht unbedingt minimal im Sinne des Spannbaums.
+          \end{itemize}
+    \item \textbf{Welche Algorithmen für die Berechnung von Spannbäumen kennen Sie? Diskutieren Sie die Unterschiede!}
+          \begin{itemize}
+              \item Prim's Algorithmus:
+                    \begin{itemize}
+                        \item Startet bei einem Knoten und fügt iterativ die leichteste Kante hinzu, die einen neuen Knoten verbindet.
+                        \item Effizient für dichte Graphen.
+                    \end{itemize}
+              \item Kruskal's Algorithmus:
+                    \begin{itemize}
+                        \item Sortiert die Kanten nach Gewicht und fügt sie zum MST hinzu, solange sie keinen Kreis bilden.
+                        \item Effizient für spärliche Graphen.
+                    \end{itemize}
+          \end{itemize}
+    \item \textbf{Wann ist ein MST eindeutig?}
+          \begin{itemize}
+              \item Ein MST ist eindeutig, wenn alle Kanten unterschiedliche Gewichte haben.
+              \item Wenn zwei Kanten das gleiche Gewicht haben, kann es mehrere mögliche MSTs geben.
+          \end{itemize}
+          \pagebreak
+    \item \textbf{Was unterscheidet eine Arboreszenz von einem gerichteten zyklenfreien Graphen?}
+          \begin{itemize}
+              \item Eine Arboreszenz ist ein gerichteter, zyklenfreier Graph, der von einem Wurzelknoten ausgeht und alle anderen Knoten erreicht.
+              \item Ein gerichteter zyklenfreier Graph (DAG) kann mehrere Wurzelknoten haben und muss nicht notwendigerweise alle Knoten erreichen.
+          \end{itemize}
+    \item \textbf{Mit welchem Algorithmus findet man minimale Arboreszenzen?}
+          \begin{itemize}
+              \item Der Edmonds-Karp-Algorithmus ist ein bekannter Algorithmus zur Berechnung minimaler Arboreszenzen.
+          \end{itemize}
+    \item \textbf{Was ist ein Webgraph?}
+          \begin{itemize}
+              \item Ein Webgraph ist ein gerichteter Graph, der die Struktur des Internets oder eines Netzwerks von Webseiten darstellt.
+              \item Knoten repräsentieren Webseiten, und Kanten repräsentieren Hyperlinks zwischen diesen Webseiten.
+          \end{itemize}
+    \item \textbf{Erklären Sie das Random Surfer Modell, welche Annahmen sind in dem Modell enthalten?}
+          \begin{itemize}
+              \item Das Random Surfer Modell beschreibt das Verhalten von Nutzern im Internet, die zufällig Links zwischen Webseiten folgen.
+              \item Der Page Rank beschreibt die Chance, dass der Random Surfer auf einer bestimmten Seite landet.
+          \end{itemize}
+    \item \textbf{Was bedeutet der Dämpfungsfaktor im Random Surfer Modell?}
+          \begin{itemize}
+              \item Der Dämpfungsfaktor ist ein Wert zwischen 0 und 1, der die Wahrscheinlichkeit angibt, dass der Random Surfer einem Link folgt.
+              \item Ein Dämpfungsfaktor von 0,85 bedeutet beispielsweise, dass 85\% der Zeit einem Link gefolgt wird und 15\% der Zeit eine zufällige Seite besucht wird.
+              \item Dies verhindert, dass der Random Surfer in endlosen Schleifen stecken bleibt und sorgt für eine gleichmäßige Verteilung der Seitenbesuche.
+          \end{itemize}
+    \item \textbf{Welches Verfahren wird für die Berechnung des Page Rank verwendet?}
+          \begin{itemize}
+              \item Dafür wird das Random Surfer Modell verwendet, welches die Wahrscheinlichkeit beschreibt, dass ein Nutzer auf einer bestimmten Seite landet.
+              \item Der Page Rank wird iterativ berechnet, indem die Adjazenzmatrix des Webgraphen verwendet wird.
+              \item Der Dämpfungsfaktor wird dabei berücksichtigt, um die Wahrscheinlichkeit zu steuern, dass der Random Surfer einem Link folgt oder eine zufällige Seite besucht.
+              \item Die Berechnung erfolgt durch die Lösung des Eigenwertproblems der Adjazenzmatrix, wobei der Page Rank als Eigenvektor des Matrixprodukts interpretiert wird.
+          \end{itemize}
+          \pagebreak
+    \item \textbf{Ist eine Matrix irreduzibel und nicht-negativ, so gibt es auch einen positiven Eigenvektor.}
+          \begin{itemize}
+              \item Wahr.
+              \item Eine irreduzible Matrix hat einen positiven Eigenvektor, da sie eine starke Verbindung zwischen den Zuständen darstellt.
+          \end{itemize}
+    \item \textbf{Beschreiben Sie ein weiteres Zentralitätsmaß außer die Eigenvektorzentralität für Graphen!}
+          \begin{itemize}
+              \item \textbf{Page Rank:} Misst die Wichtigkeit eines Knotens basierend auf der Anzahl und Qualität der eingehenden Verbindungen.
+              \item \textbf{Zwischenzentralität:} Misst, wie oft ein Knoten auf dem kürzesten Pfad zwischen anderen Knoten liegt.
+              \item \textbf{Nähezentralität:} Misst die durchschnittliche Entfernung eines Knotens zu allen anderen Knoten im Graphen.
+          \end{itemize}
+    \item \textbf{Was ist ein Netzwerk und was ist ein Fluss?}
+          \begin{itemize}
+              \item Ein Netzwerk ist ein Graph, wobei die Kanten Kapazitäten haben, die den maximalen Fluss zwischen den Knoten begrenzen.
+              \item Ein Fluss nutzt die Kapazität aus, muss aber die Flusserhaltung und die Kapazitätsbeschränkungen der Kanten respektieren.
+              \item Das Flusserhaltungsgesetz besagt, dass die Summe der eingehenden Flüsse gleich der Summe der ausgehenden Flüsse an jedem Knoten ist, außer am Start- und Zielknoten.
+              \item $f(u) = \sum_{v \in N_{in}(u)} f(v) - \sum_{v \in N_{out}(u)} f(v)$, wobei $f(u)$ der Fluss am Knoten $u$ ist.
+          \end{itemize}
+    \item \textbf{Was ist ein Flussnetzwerk?}
+          \begin{itemize}
+              \item Ein Flussnetzwerk ist ein Netzwerk, in dessen Graphen es keine Retourkanten gibt, d.h. es gibt keine Kanten, die von einem Zielknoten zurück zu einem Startknoten führen.
+          \end{itemize}
+    \item \textbf{Wie lässt sich ein augmentierender Pfad finden?}
+          \begin{itemize}
+              \item Ein augmentierender Pfad ist ein Pfad im Flussnetzwerk, der von einem Startknoten zu einem Zielknoten führt und in dem noch Kapazität für zusätzlichen Fluss vorhanden ist.
+              \item Er kann durch Tiefensuche (DFS) oder Breitensuche (BFS) gefunden werden.
+          \end{itemize}
+    \item \textbf{Lineare Programmierung ist nur dann effizient lösbar wenn alle Variablen kontinuierlich sind.}
+          \begin{itemize}
+              \item Falsch.
+              \item Lineare Programmierung kann auch mit ganzzahligen Variablen gelöst werden, aber die Effizienz kann variieren.
+          \end{itemize}
+\end{itemize}
+\end{document}
