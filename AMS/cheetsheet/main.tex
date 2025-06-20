@@ -89,7 +89,7 @@
     \textbf{Hamiltonpfad} & $P = (v_1, v_2, \ldots, v_n)$   & Pfad, der alle Knoten genau einmal     \\
                           &                                 & besucht                                \\
     \hline
-    \textbf{Eulerpfad}    & $P = (v_1, v_2, \ldots, v_n)$   & Weg, der alle Kanten genau einmal      \\
+    \textbf{Eulerweg}     & $P = (v_1, v_2, \ldots, v_n)$   & Weg, der alle Kanten genau einmal      \\
                           &                                 & besucht                                \\
     \hline
     \textbf{Eulerkreis}   & $C = (v_1, v_2, \ldots, v_n)$   & Kreis, der alle Kanten genau einmal    \\
@@ -241,7 +241,7 @@
 \section{Ausgewählte Theoriefragen}
 \pagebreak
 
-\begin{itemize}
+\begin{enumerate}
     \item \textbf{Welche Arten von Graphen kennen Sie?}
           \begin{itemize}
               \item Ungerichtete Graphen
@@ -289,11 +289,11 @@
           \pagebreak
     \item \textbf{Wann ist ein Graph eulersch?}
           \begin{itemize}
-              \item Ein Graph ist eulersch, wenn er einen Eulerpfad enthält, der alle Kanten genau einmal besucht.
+              \item Ein Graph ist eulersch, wenn er einen Eulerweg enthält, der alle Kanten genau einmal besucht.
               \item Ein Graph ist eulersch, wenn er entweder:
                     \begin{itemize}
                         \item keinen Knoten mit ungeradem Grad hat (Eulerkreis) oder
-                        \item genau zwei Knoten mit ungeradem Grad hat (Eulerpfad).
+                        \item genau zwei Knoten mit ungeradem Grad hat (Eulerweg).
                     \end{itemize}
           \end{itemize}
     \item \textbf{Wann ist ein Graph hamiltonisch?}
@@ -325,7 +325,7 @@
           \end{itemize}
     \item \textbf{Diskutieren Sie die Euler- bzw. Hamiltoneigenschaft für vollständige Graphen $K_n$ mit $n > 3$!}
           \begin{itemize}
-              \item Vollständige Graphen $K_n$ sind hamiltonisch und manchmal eulerisch für $n > 3$.
+              \item Vollständige Graphen $K_n$ sind hamiltonisch und manchmal eulersch für $n > 3$.
               \item Euler: Jeder Knoten hat einen geraden Grad, falls $n$ ungerade ist(Kanten pro Knoten ist $n-1$).
                     Wenn $n$ gerade ist, hat jeder Knoten einen ungeraden Grad und es gibt keinen Eulerkreis.
               \item Hamilton: Jeder Knoten ist mit jedem anderen Knoten verbunden, was einen Hamiltonkreis ermöglicht.
@@ -378,30 +378,30 @@
           \end{itemize}
     \item \textbf{Mit welchem Algorithmus findet man minimale Arboreszenzen?}
           \begin{itemize}
-              \item Der Edmonds-Karp-Algorithmus ist ein bekannter Algorithmus zur Berechnung minimaler Arboreszenzen.
+              \item Der Edmonds-Algorithmus findet minimale Arboreszenzen in gerichteten Graphen.
           \end{itemize}
     \item \textbf{Was ist ein Webgraph?}
           \begin{itemize}
-              \item Ein Webgraph ist ein gerichteter Graph, der die Struktur des Internets oder eines Netzwerks von Webseiten darstellt.
-              \item Knoten repräsentieren Webseiten, und Kanten repräsentieren Hyperlinks zwischen diesen Webseiten.
+              \item Ein Webgraph ist ein gerichteter Graph, der die Struktur des Internets oder eines Netzwerks von Webseiten abbildet.
+              \item Knoten repräsentieren Webseiten, Kanten repräsentieren Hyperlinks zwischen diesen Webseiten.
           \end{itemize}
     \item \textbf{Erklären Sie das Random Surfer Modell, welche Annahmen sind in dem Modell enthalten?}
           \begin{itemize}
-              \item Das Random Surfer Modell beschreibt das Verhalten von Nutzern im Internet, die zufällig Links zwischen Webseiten folgen.
-              \item Der Page Rank beschreibt die Chance, dass der Random Surfer auf einer bestimmten Seite landet.
+              \item Das Random-Surfer-Modell beschreibt das Verhalten von Nutzern im Internet, die zufällig Links zwischen Webseiten folgen oder zufällig auf eine neue Seite springen.
+              \item Der PageRank gibt die Wahrscheinlichkeit an, dass der Random Surfer auf einer bestimmten Seite landet.
           \end{itemize}
     \item \textbf{Was bedeutet der Dämpfungsfaktor im Random Surfer Modell?}
           \begin{itemize}
-              \item Der Dämpfungsfaktor ist ein Wert zwischen 0 und 1, der die Wahrscheinlichkeit angibt, dass der Random Surfer einem Link folgt.
-              \item Ein Dämpfungsfaktor von 0,85 bedeutet beispielsweise, dass 85\% der Zeit einem Link gefolgt wird und 15\% der Zeit eine zufällige Seite besucht wird.
+              \item Der Dämpfungsfaktor ist ein Wert zwischen 0 und 1, der angibt, mit welcher Wahrscheinlichkeit der Random Surfer einem Link folgt, anstatt zufällig zu springen.
+              \item Ein Dämpfungsfaktor von 0{,}85 bedeutet beispielsweise, dass 85\% der Zeit einem Link gefolgt wird und 15\% der Zeit eine zufällige Seite besucht wird.
               \item Dies verhindert, dass der Random Surfer in endlosen Schleifen stecken bleibt und sorgt für eine gleichmäßige Verteilung der Seitenbesuche.
           \end{itemize}
-    \item \textbf{Welches Verfahren wird für die Berechnung des Page Rank verwendet?}
+    \item \textbf{Welches Verfahren wird für die Berechnung des PageRank verwendet?}
           \begin{itemize}
-              \item Dafür wird das Random Surfer Modell verwendet, welches die Wahrscheinlichkeit beschreibt, dass ein Nutzer auf einer bestimmten Seite landet.
-              \item Der Page Rank wird iterativ berechnet, indem die Adjazenzmatrix des Webgraphen verwendet wird.
-              \item Der Dämpfungsfaktor wird dabei berücksichtigt, um die Wahrscheinlichkeit zu steuern, dass der Random Surfer einem Link folgt oder eine zufällige Seite besucht.
-              \item Die Berechnung erfolgt durch die Lösung des Eigenwertproblems der Adjazenzmatrix, wobei der Page Rank als Eigenvektor des Matrixprodukts interpretiert wird.
+              \item Der PageRank basiert auf dem Random-Surfer-Modell: Mit Wahrscheinlichkeit $\alpha$ folgt ein Nutzer einem zufällig gewählten Link, mit Wahrscheinlichkeit $1-\alpha$ springt er auf eine beliebige Seite.
+              \item Die Berechnung erfolgt iterativ: Jeder Knoten verteilt seinen aktuellen PageRank anteilig auf seine ausgehenden Kanten.
+              \item Die Werte werden iterativ aktualisiert, bis sich der PageRank aller Knoten kaum noch ändert (Konvergenz).
+              \item Der Dämpfungsfaktor (typisch $\alpha = 0{,}85$) verhindert, dass der Surfer in Sackgassen stecken bleibt.
           \end{itemize}
           \pagebreak
     \item \textbf{Ist eine Matrix irreduzibel und nicht-negativ, so gibt es auch einen positiven Eigenvektor.}
@@ -411,9 +411,9 @@
           \end{itemize}
     \item \textbf{Beschreiben Sie ein weiteres Zentralitätsmaß außer die Eigenvektorzentralität für Graphen!}
           \begin{itemize}
-              \item \textbf{Page Rank:} Misst die Wichtigkeit eines Knotens basierend auf der Anzahl und Qualität der eingehenden Verbindungen.
-              \item \textbf{Zwischenzentralität:} Misst, wie oft ein Knoten auf dem kürzesten Pfad zwischen anderen Knoten liegt.
-              \item \textbf{Nähezentralität:} Misst die durchschnittliche Entfernung eines Knotens zu allen anderen Knoten im Graphen.
+              \item \textbf{PageRank:} Misst die Wichtigkeit eines Knotens basierend auf der Anzahl und Qualität der eingehenden Verbindungen.
+              \item \textbf{Zwischenzentralität:} Misst, wie oft ein Knoten auf dem kürzesten Pfad zwischen anderen Knoten liegt (Betweenness Centrality).
+              \item \textbf{Nähezentralität:} Misst die durchschnittliche Entfernung eines Knotens zu allen anderen Knoten im Graphen (Closeness Centrality).
           \end{itemize}
     \item \textbf{Was ist ein Netzwerk und was ist ein Fluss?}
           \begin{itemize}
@@ -422,10 +422,6 @@
               \item Das Flusserhaltungsgesetz besagt, dass die Summe der eingehenden Flüsse gleich der Summe der ausgehenden Flüsse an jedem Knoten ist, außer am Start- und Zielknoten.
               \item $f(u) = \sum_{v \in N_{in}(u)} f(v) - \sum_{v \in N_{out}(u)} f(v)$, wobei $f(u)$ der Fluss am Knoten $u$ ist.
           \end{itemize}
-    \item \textbf{Was ist ein Flussnetzwerk?}
-          \begin{itemize}
-              \item Ein Flussnetzwerk ist ein Netzwerk, in dessen Graphen es keine Retourkanten gibt, d.h. es gibt keine Kanten, die von einem Zielknoten zurück zu einem Startknoten führen.
-          \end{itemize}
     \item \textbf{Wie lässt sich ein augmentierender Pfad finden?}
           \begin{itemize}
               \item Ein augmentierender Pfad ist ein Pfad im Flussnetzwerk, der von einem Startknoten zu einem Zielknoten führt und in dem noch Kapazität für zusätzlichen Fluss vorhanden ist.
@@ -433,8 +429,9 @@
           \end{itemize}
     \item \textbf{Lineare Programmierung ist nur dann effizient lösbar wenn alle Variablen kontinuierlich sind.}
           \begin{itemize}
-              \item Falsch.
-              \item Lineare Programmierung kann auch mit ganzzahligen Variablen gelöst werden, aber die Effizienz kann variieren.
+              \item Wahr.
+              \item Lineare Programmierung kann auch mit ganzzahligen Variablen gelöst werden, aber die Effizienz leidet darunter.
+              \item Ganzzahlige lineare Programmierung ist NP-vollständig, während kontinuierliche lineare Programmierung in polynomialer Zeit gelöst werden kann.
           \end{itemize}
-\end{itemize}
+\end{enumerate}
 \end{document}
