@@ -1,0 +1,32 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SWE", "SWE", "{02791871-9FCF-BC3A-997D-2B5A07811CFD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SWE_Zusammenfassung", "SWE_Zusammenfassung", "{6C60F8D4-86C6-DF85-0971-F25FD6C85FB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csharp", "SWE\SWE_Zusammenfassung\csharp\csharp.csproj", "{4E7F5745-90D6-D04E-C50D-51C5611D3F8D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4E7F5745-90D6-D04E-C50D-51C5611D3F8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E7F5745-90D6-D04E-C50D-51C5611D3F8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E7F5745-90D6-D04E-C50D-51C5611D3F8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E7F5745-90D6-D04E-C50D-51C5611D3F8D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6C60F8D4-86C6-DF85-0971-F25FD6C85FB3} = {02791871-9FCF-BC3A-997D-2B5A07811CFD}
+		{4E7F5745-90D6-D04E-C50D-51C5611D3F8D} = {6C60F8D4-86C6-DF85-0971-F25FD6C85FB3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C30EA7A8-41B7-4834-A9D5-B27B02BD0266}
+	EndGlobalSection
+EndGlobal

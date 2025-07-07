@@ -1,0 +1,121 @@
+\documentclass[12pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[naustrian]{babel}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{subcaption}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{listings}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{bookmark}
+
+%pdfs
+\usepackage{pdfpages}
+\usepackage{tikz}
+
+%page borders
+\usepackage{geometry}
+\geometry{left=2.5cm,right=2.5cm,top=3cm,bottom=2.5cm}
+
+\usepackage{minted}
+\setminted {
+	%style=igor, %borland, autumn, vs
+	encoding=utf-8,
+	autogobble,
+	tabsize=4,
+	linenos,
+	breaklines,
+	%escapeinside=||
+	%bgcolor=bg
+	frame=single
+}
+
+\newenvironment{code}{\captionsetup{type=listing}}{}
+
+%title/footer/header values
+\usepackage{titling}
+\title{SWE Zusammenfassung}
+\author{Elias Leonhardsberger}
+\date{\today{}, Hagenberg}
+
+%footer/header
+%\usepackage[automark]{scrpage2}
+%\pagestyle{headings}
+%\clearscrheadfoot
+%\ihead{\thetitle}
+%\chead{\theauthor}
+%\ohead{\today}
+%\cfoot{Seite \pagemark}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\pagebreak
+
+\section{C++}
+\subsection{STL}
+\subsection{Iteratoren}
+\subsection{Map}
+\section{Java}
+\subsection{Standardbibliothek}
+\subsection{JCF}
+\section{Softwaremuster}
+\subsection{OOP}
+\subsection{Gang of 4}
+\subsection{MVC}
+\subsection{Iterator}
+\subsection{Composite}
+
+\pagebreak
+\section{Syntaxvergleich}
+Um den Syntax von C++ und Java zu vergleichen, hab ich ein kleines Beispielprogramm geschrieben mit:
+\begin{itemize}
+	\item einem Interface
+	\item einer Basisklasse, die das Interface implementiert
+	\item einer abgeleiteten Klasse, die von der Basisklasse erbt
+	\item einer Iteratorimplementierung in der abgeleiteten Klasse
+	\item einer Main-Methode, die ein Objekt der abgeleiteten Klasse verwendet
+\end{itemize}
+
+\subsection{C++}
+\subsubsection{Interface}
+\inputminted{cpp}{cpp/interface.h}
+\subsubsection{Basisklasse}
+\inputminted{cpp}{cpp/baseclass.h}
+\subsubsection{Abgeleitete Klasse}
+\inputminted{cpp}{cpp/derivedclass.h}
+\subsubsection{Main}
+\inputminted{cpp}{cpp/main.cpp}
+\pagebreak
+
+\subsection{Java}
+\subsubsection{Interface}
+\inputminted{java}{java/src/main/java/javademo/Interface.java}
+\subsubsection{Basisklasse}
+\inputminted{java}{java/src/main/java/javademo/Baseclass.java}
+\subsubsection{Abgeleitete Klasse}
+\inputminted{java}{java/src/main/java/javademo/Derivedclass.java}
+\subsubsection{Main}
+\inputminted{java}{java/src/main/java/javademo/Demo.java}
+\pagebreak
+
+% C# kommt nicht zur Klausur
+% \subsection{C\#}
+% \subsubsection{Interface}
+% \inputminted{csharp}{csharp/IInterface.cs}
+% \subsubsection{Basisklasse}
+% \inputminted{csharp}{csharp/Baseclass.cs}
+% \subsubsection{Abgeleitete Klasse}
+% \inputminted{csharp}{csharp/Derivedclass.cs}
+% \subsubsection{Main}
+% \inputminted{csharp}{csharp/Program.cs}
+% \pagebreak
+
+\end{document}
