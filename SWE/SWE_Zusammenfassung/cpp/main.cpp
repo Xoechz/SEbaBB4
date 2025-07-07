@@ -28,9 +28,9 @@ int main()
 
         // Iterate through the values using the iterator
         std::cout << "Iterating through values: ";
-        for (auto it = movedDerived.begin(); it != movedDerived.end(); ++it)
+        for (auto i : movedDerived)
         {
-            std::cout << *it << " ";
+            std::cout << i << " ";
         }
         std::cout << std::endl;
     }

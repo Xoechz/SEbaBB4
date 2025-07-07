@@ -14,6 +14,7 @@
 \usepackage{float}
 \usepackage{tikz}
 \usepackage{bookmark}
+\usepackage{epigraph}
 
 %pdfs
 \usepackage{pdfpages}
@@ -37,6 +38,7 @@
 }
 
 \newenvironment{code}{\captionsetup{type=listing}}{}
+\setlength\epigraphwidth{0.8\textwidth}
 
 %title/footer/header values
 \usepackage{titling}
@@ -126,10 +128,148 @@ Es gibt auch diverse Manipulatoren, die das Verhalten von Streams beeinflussen.
 	\item \emph{std::setfill(c)} für das Füllzeichen
 	\item \emph{std::setprecision(n)} für die Anzahl der Nachkommastellen
 	\item \emph{std::setw(n)} für die Breite des Feldes
-	\item ...
 \end{itemize}
+\pagebreak
 
 \subsection{STL}
+\epigraph{!!Diese Schablone hat keine Laufzeitprüfungen!!}{\textit{Doblers Foliensatz}}
+
+Generische Programmierung statt OOP um den Code wiederverwendbar und effizient zu machen.
+
+Die STL ist in mehrere Teile aufgeteilt:
+\begin{itemize}
+	\item \textbf{Behälter} für die Speicherung von Daten
+	\item \textbf{Iteratoren} für den Zugriff auf die Daten
+	\item \textbf{Algorithmen} für die Verarbeitung von Daten
+	\item \textbf{Funktionsobjekte} für die Kapselung von Funktionen für andere Komponenten
+	\item \textbf{Adapter} für die Anpassung von Behälter und Iteratoren
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/stl_1.png}
+	\caption{Verhältnisse der STL Komponenten}
+\end{figure}
+
+\subsubsection{Iteratoren}
+Iteratoren sind eine Verallgemeinerung von Zeigern, die eine abstrakte Schnittstelle zwischen
+Behältern und Algorithmen darstellen.
+
+In der STL sind Iteratoren mithilfe von Ducktyping umgesetzt, das heißt, wenn die Schnittstelle erfüllt ist,
+also die Methoden richtig implementiert sind, dann kann der Iterator verwendet werden.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/stl_2.png}
+	\caption{Iteratoren in der STL}
+\end{figure}
+
+Allgemein müssen Iteratoren die Vergleichsoperatoren \emph{==} und \emph{!=} implementieren, um zu überprüfen,
+ob zwei Iteratoren auf das gleiche Element zeigen, und die Dereferenzierungsoperatoren \emph{*},
+um auf das Element zuzugreifen.
+
+Der \textbf{Vorwärtsiterator} implementiert zusätzlich den Inkrementoperator \emph{++}, um zum nächsten Element zu gelangen.
+
+Der \textbf{bidirektionale Iterator} implementiert zusätzlich den Dekrementoperator \emph{--},
+um zum vorherigen Element zu gelangen.
+
+Der \textbf{Random-Access-Iterator} implementiert zusätzlich die Operatoren \emph{+}, \emph{-}, \emph{+=} und \emph{-=}, um auf ein
+beliebiges Element im Behälter zuzugreifen, und die Vergleichsoperatoren \emph{<}, \emph{>}, \emph{<=} und \emph{>=},
+um die Position der Iteratoren zu vergleichen. Dabei wird auch ein Differenztyp benötigt(z.B. \emph{ptrdiff\_t}).
+
+Der \textbf{Input-Iterator} ist ein Vorwärtsiterator, der nur gelesen werden kann.
+
+Der \textbf{Output-Iterator} ist ein Vorwärtsiterator, auf den nur geschrieben werden kann.
+\linebreak
+
+Streams und damit auch Dateien können mit dem \emph{istream\_iterator} und
+\emph{ostream\_iterator} als Iteratoren verwendet werden.
+
+Es gibt auch Adapter für Iteratoren, wie
+\begin{itemize}
+	\item \textbf{reverse\_iterator} für die Umkehrung der Iteration(v.rbegin() und v.rend())
+	\item \textbf{back\_insert\_iterator} für das Einfügen von Elementen am Ende eines Behälters
+	\item \textbf{front\_insert\_iterator} für das Einfügen von Elementen am Anfang eines Behälters
+	\item \textbf{insert\_iterator} für das Einfügen von Elementen an einer bestimmten Position in einem Behälter
+\end{itemize}
+
+Die Einfügeiteratoren sind da um die Einfügeoperationen in Algorithmen zu abstrahieren.
+\linebreak
+Iteratoreigenschaften werden verwendet um verschiedene Implementierungen für verschiedene Iteratoren zu ermöglichen.
+Die Eigenschaften sind. Außerdem wird der Wertetyp und er Distanztyp damit gespeichert.
+
+\subsubsection{Behälter}
+Behälter sind Klassen, die Daten speichern und verwalten. Es gibt verschiedene Arten von Behältern, die sich in ihrer
+Implementierung und ihrem Verhalten unterscheiden. Die wichtigsten Behältertypen sind:
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{ p{2.5cm} | p{7cm} | p{5cm} }
+		Behältertyp            & Beschreibung
+		                       & Verwendung                                                                        \\
+		\hline
+		\textbf{vector}        & Dynamisches Array, das hinten offen ist und schnellen direkten Zugriff ermöglicht
+		                       & Standard für sequentielle Daten                                                   \\
+		\hline
+		\textbf{list}          & Doppelt verkettete Liste, die schnelle Einfüge-
+		und Löschoperationen ermöglicht, aber keine schnelle Zugriffsfunktion
+		                       & Wenn häufige Einfüg-/Löschungenoperationen erforderlich sind
+		\\
+		\hline
+		\textbf{deque}         & beidseitig offenes dynamisches Array, das schnellen Zugriff
+		auf beide Enden ermöglicht
+		                       & Wenn häufige Einfüg-/Löschungenoperationen an beiden Enden erforderlich sind,
+		aber direkter Zugriff auch wichtig ist                                                                     \\
+		\hline
+		\textbf{array}         & Schnittstelle für statisches Array
+		                       & Wenn die Größe des Arrays zur Compilezeit bekannt ist und
+		STL Algorithmen verwendet werden                                                                           \\
+		\hline
+		\textbf{forward\_list} & Minimale einfach verkettete Liste
+		                       & Wenn Speicherverbrauch wichtig ist und nur Vorwärtsiteration benötigt wird        \\
+	\end{tabular}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{ p{2.5cm} | p{7cm} | p{5cm} }
+		Behältertyp               & Beschreibung
+		                          & Verwendung                                                                \\
+		\hline
+		\textbf{stack}            & LIFO-Adapter für einen Behälter. Der genaue Behälter ist
+		nicht spezifiziert, aber meist ein \emph{deque} oder \emph{vector}
+		                          & Wenn nur die zuletzt hinzugefügten Elemente benötigt werden.              \\
+		\hline
+		\textbf{queue}            & FIFO-Adapter für einen Behälter. Der genaue Behälter ist
+		nicht spezifiziert, aber meist ein \emph{deque} oder \emph{list}
+		                          & Wenn nur die zuerst hinzugefügten Elemente benötigt werden.               \\
+		\hline
+		\textbf{priority\_ queue} & Adapter für einen Behälter, der die Elemente nach Priorität
+		sortiert. Der genaue Behälter ist nicht spezifiziert, aber meist ein \emph{vector} oder
+		\emph{deque}              & Wenn die Elemente nach Priorität sortiert werden müssen.                  \\
+		\hline
+		\textbf{set}              & Assoziativer Behälter, in dem die Elemente der Zugriffschlüssel
+		sind.(Zugriff O(log n))
+		                          & Wenn die Elemente als Zugriffschlüssel dienen.                            \\
+		\hline
+		\textbf{multiset}         & Set in dem Duplikate erlaubt sind
+		                          & Wenn die Elemente als Zugriffschlüssel dienen aber Duplikate erlaubt sind \\
+		\hline
+		\textbf{map}              & Assoziativer Behälter, der zu jedem Schlüssel ein Element zuordnet.
+		                          & Wenn auf die Elemente nach einem Schlüssel zugegriffen wird.              \\
+		\hline
+		\textbf{multimap}         & Map in der Schlüsselduplikate erlaubt sind
+		                          & Wenn auf die Elemente nach einem Schlüssel zugegriffen wird,
+		aber Duplikate erlaubt sind.                                                                          \\
+	\end{tabular}
+\end{table}
+
+Assoziative Behälter sind entweder mit einem Rot-Schwarz-Baum oder einem Hash-Table implementiert.
+
+\subsubsection{Funktionsobjekte}
+
+\pagebreak
+
 \section{Java}
 \subsection{Standard Library}
 \subsection{JCF}
