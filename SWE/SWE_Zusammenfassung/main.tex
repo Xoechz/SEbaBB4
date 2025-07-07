@@ -60,11 +60,78 @@
 \pagebreak
 
 \section{C++}
+\subsection{Standard Library}
+Der Namensraum \emph{std} ist für die Standardbibliothek von C++ und C reserviert.
+Alle C Header-Dateien sind in C++ verfügbar, ihr Name ist immer mit einem \emph{c}
+vorangestellt, z.B. \emph{cstdio} für \emph{stdio.h} in C.
+
+\subsubsection{Strings}
+Im gegensatz zu C, wo Strings als char-Arrays implementiert sind, gibt es in C++
+die Klasse \emph{std::string}, die es ermöglicht mit Templates Strings aus \emph{char},
+\emph{wchar\_t} oder einem beliebigen eigenen Typ zu erstellen. Die ersten beiden
+Varianten sind bereits vordefiniert.
+
+\begin{minted}{cpp}
+typedef basic_string< char >   string;
+typedef basic_string<wchar_t> wstring;
+\end{minted}
+
+\subsubsection{Ein-/Ausgabe}
+In C und C++ gibt es keine in die Sprache eingebauten Ein-/Ausgabefunktionen. In C werden
+die Funktionen aus \emph{stdio.h} verwendet, in C++ die Klassen aus \emph{iostream}.
+
+Der Unterscheid ist, dass C++ mit Streams arbeitet, diese sind
+\begin{itemize}
+	\item typsicher
+	\item implementierbar für eigene Klassen
+	\item effizienter da man nicht auf interpretierte Formatzeichenketten angewiesen ist(z.B. \emph{\%d} für int)
+	\item auf Zeichenebene Thread-sicher
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.45\textwidth]{images/cpp_1.png}
+	\includegraphics[width=0.45\textwidth]{images/cpp_2.png}
+	\caption{Klassenhierarchie der Ein-/Ausgabeklassen in C++}
+\end{figure}
+
+Diese Streams sind in mehreren Header-Dateien aufgeteilt:
+\begin{itemize}
+	\item \textbf{iosfwd} für Vorwärtsdeklarationen(Sehr klein)
+	\item \textbf{streambuf} für die Pufferung von Ein-/Ausgabe
+	\item \textbf{istream} für die Eingabe
+	\item \textbf{ostream} für die Ausgabe
+	\item \textbf{iostream} für die Standard-Ein-/Ausgabe
+	\item \textbf{fstream} für Dateiein-/ausgabe
+	\item \textbf{sstream} für String-Ein-/Ausgabe
+	\item \textbf{strstream} für für Char*-Ein-/Ausgabe
+	\item \textbf{iomanip} für Ein-/Ausgabeformatierung
+\end{itemize}
+
+Flush kann auch mit Stream Aufrufen verkettet werden, z.B. \emph{cout << std::flush;}.
+\emph{std::endl} flusht den Stream auch nachdem er einen Zeilenumbruch ausgegeben hat.
+Achtung kann Performanceprobleme verursachen, da es den Puffer jedes Mal leert! Wenn mehrere
+Zeilenumbrüche ausgegeben werden eher den folgenden Ausschnitt verwenden.
+
+\begin{minted}{cpp}
+stream << "\n"
+\end{minted}
+
+Es gibt auch diverse Manipulatoren, die das Verhalten von Streams beeinflussen.
+\begin{itemize}
+	\item \emph{std::dec} für Dezimalzahlen
+	\item \emph{std::hex} für Hexadezimalzahlen
+	\item \emph{std::oct} für Oktalzahlen
+	\item \emph{std::setbase(n)} für die Basis der Zahlendarstellung
+	\item \emph{std::setfill(c)} für das Füllzeichen
+	\item \emph{std::setprecision(n)} für die Anzahl der Nachkommastellen
+	\item \emph{std::setw(n)} für die Breite des Feldes
+	\item ...
+\end{itemize}
+
 \subsection{STL}
-\subsection{Iteratoren}
-\subsection{Map}
 \section{Java}
-\subsection{Standardbibliothek}
+\subsection{Standard Library}
 \subsection{JCF}
 \section{Softwaremuster}
 \subsection{OOP}
