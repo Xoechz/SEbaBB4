@@ -316,8 +316,178 @@ Davon können beliebig viele verwendet werden.
 \pagebreak
 
 \section{Java}
-\subsection{Standard Library}
+
+\subsection{Eigenschaften}
+
+\begin{itemize}
+	\item \textbf{Objektorientiert} - Objekt und Klassenbasiert mit Strukturierung in Paketen
+	\item \textbf{Interpretierte Ausführung} - Java wird in Bytecode kompiliert, der von der Java Virtual Machine(JVM) interpretiert wird.
+	\item \textbf{Architekturunabhängig} - Java-Programme können auf jeder Plattform, die eine JVM hat, ausgeführt werden.
+	\item \textbf{Dynamisch und verteilt} - Klassen werden zur Laufzeit vom Interpreter geladen, es gibt keine statische Bindung.
+	\item \textbf{Einfach} - Nur unbedingt notwendige Features. Zeiger, Mehrfachvererbung und Operatorüberladung sind nicht erlaubt.
+	\item \textbf{Robust} - Starke Typisierung, keine Zeigerarithmetik, Laufzeitprüfungen bei Feldern, Ausnahmenbehandlung und automatische Speicherverwaltung.
+	\item \textbf{Sicher} - Java nutzt Sandboxing, das den Zugriff auf Systemressourcen einschränkt.
+	\item \textbf{Hohe Effizienz} - Nur 10 mal langsamer als C ;). Mit JIT-Compiler kommt oft ausgeführter Code näher an C.
+	\item \textbf{Leichtgewichtige Prozesse} - Threads sind leichtgewichtig durch einfache Synchronisation und Kommunikation.
+\end{itemize}
+
+Ein Programm besteht aus beliebig vielen Klassen. Jede public Klasse muss in einer eigenen Datei liegen, die den gleichen Namen wie die Klasse hat.
+Nur Klassen, Interfaces und Pakete haben globale Namen, es gibt keine globalen Variablen oder Funktionen.
+Ein Paket ist eine Sammlung von logisch zusammengehörigen Klassen, die in einem Verzeichnis liegen. Die package-Deklaration muss am Anfang der Datei stehen.
+Hierarchische Paketnamen werden 1 zu 1 auf Verzeichnisse abgebildet, z.B. \emph{java.lang} ist im Verzeichnis \emph{java/lang}.
+Pakete der Java Standardbibliothek werden über die Property  \emph{java.home} gefunden,
+Third-Party-Bibliotheken müssen über den Classpath angegeben werden.
+\linebreak
+
+Es gibt keinen Präprozessor, dadurch sind keine Makros, \#define oder \#include möglich.
+Stattdessen gibt es die \emph{import}-Anweisung, die Klassen aus anderen Paketen importiert.
+Für Konstanten gibt es \emph{static final} Membervariablen.
+
+\subsection{Datentypen}
+
+boolean ist kein Zahlenwert, also kann man nicht mehr damit rechnen. Es gibt keine unsigned Datentypen,
+also sind alle Ganzzahligen Datentypen vorzeichenbehaftet.
+\linebreak
+
+Statt Pointer gibt es Referenzen, diese werden automatisch dereferenziert und man kann
+nicht mit ihnen rechnen. Es gibt ein \emph{null}-Referenz Literal, die auf kein Objekt zeigt.
+
+Objekte werden nicht bei der Definition statisch angelegt, sondern mit dem
+\emph{new}-Operator dynamisch im Heap angelegt. Es gibt kein delete, da der Speicher
+automatisch vom Garbage Collector freigegeben wird, wenn es keine Referenz auf ein Objekt mehr gibt.
+\linebreak
+
+Felder werden in Java mit mit eckigen Klammern angelegt. Es ist auch möglich, mehrdimensionale
+Felder nicht rechteckig zu machen, also dass die Zeilen unterschiedlich lang sind.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/java_1.png}
+	\caption{Felder in Java}
+\end{figure}
+
+Strings sind Objekte der Klasse \emph{java.lang.String}, die immutable sind, also nicht verändert werden können.
+Alle Stringoperationen erzeugen ein neues String-Objekt. Für Stringliterale werden automatisch
+String-Objekte erzeugt.
+Wenn man Strings bearbeiten möchte ohne neue Objekte zu erzeugen, muss man StringBuilder oder StringBuffer verwenden.
+
+"Normale" Exceptions(Checked Exceptions) müssen entweder behandelt werden oder in der
+Methodendeklaration mit \emph{throws} angegeben werden. Unchecked Exceptions sind RuntimeExceptions, die nicht behandelt werden müssen.
+\pagebreak
+
+\subsubsection{Klassen und Objekte}
+\footnote{Ab hier wurde weniger Aufwand in die Zusammenfassung hineingesteckt. lol}
+Initializer und Konstruktoren existieren.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/java_2.png}
+	\caption{Sichtbarkeiten in Java}
+\end{figure}
+
+Finalizer werden aufgerufen, wenn ein Objekt vom Garbage Collector freigegeben wird.
+Sie sind nicht garantiert, dass sie aufgerufen werden, also sollten sie nicht für wichtige
+Logik verwendet werden.\footnote{Schmutz}
+
+Für Vererbung siehe Kapitel \ref{sec:syntaxvergleich}.
+
+Mit Super kann auf die Basisklasse zugegriffen werden, wenn der Konstruktor der Basisklasse
+aufgerufen werden soll, muss \emph{super()} im Konstruktor der abgeleiteten Klasse aufgerufen
+werden.
+
+Membervariablen können versteckt werden, indem man eine Variable mit dem gleichen Namen
+in der abgeleiteten Klasse deklariert. Mit \emph{this} und \emph{super} kann auf die
+jeweilige Variable zugegriffen werden.
+
+Fürs Überschreiben von Methoden muss vor der Methode \emph{@Override} stehen.
+Methoden mit dem Schlüsselwort \emph{final} können nicht mehr überschrieben werden.
+
+\subsubsection{Interfaces und Abstrakte Klassen}
+
+Klassen können als \emph{abstract} deklariert werden, wenn sie nicht instanziiert werden sollen.
+Abstrakte Klassen können abstrakte Methoden enthalten, die in abgeleiteten Klassen implementiert werden
+muss. Abstrakte Klassen können auch normale oder final Methoden enthalten.
+
+Interfaces sind pur abstrakte Klassen, die nur abstrakte Methoden enthalten dürfen.
+
+Mehrfachvererbung ist in Java von Klassen nicht erlaubt, aber eine Klasse kann
+mehrere Interfaces implementieren.
+
+\subsubsection{Generizität}
+
+Bis Java 5.0 gab es in Java keine Generizität, also mussten alle Collections mit Polymorphismus
+implementiert werden(nur Object Collections).
+
+In Java werden Generics mit dem \emph{<>}-Operator
+implementiert. Dabei wird der Typ in spitzen Klammern angegeben, z.B. \emph{List<String>}
+für eine Liste von Strings. Anders als in C\# werden Generics in Java mit Type-Erasure implementiert,
+das heißt, dass die Implementierung weiterhin mit Objekten arbeitet und die Typinformationen
+nur zur Compilezeit geprüft werden können\footnote{Ebenso Schmutz}.
+
+
+\subsubsection{Lamda-Ausdrücke und Streams}
+
+Lamda-Ausdrücke wurden in Java 8 eingeführt und werden mit dem
+\emph{->}-Operator geschrieben. Mit ihnen kann man anonyme Funktionen
+erstellen, die zum Beispiel als Argumente an Methoden übergeben werden können.
+
+Ein wichtiger Anwendungsfall sind Streams, die das Abarbeiten vom Elementen
+in einer Collection vereinfachen. Man kann zum Beispiel mit einem Prädikat
+und der \emph{filter}-Methode nur die Elemente einer Collection
+auswählen, die das Prädikat erfüllen. Mit der \emph{map}-Methode kann man
+jedes Element einer Collection durch eine Funktion transformieren.
+Die \emph{reduce}-Methode kann verwendet werden, um eine Collection auf einen
+einzigen Wert zu reduzieren, z.B. die Summe aller Elemente. \emph{forEach}
+kann verwendet werden, um eine Funktion auf jedes Element einer Collection
+anzuwenden, ohne eine Schleife zu verwenden.\footnote{Worse Linq}
+
 \subsection{JCF}
+\begin{table}[H]
+	\centering
+	\begin{tabular}{ p{4cm} | p{11cm} }
+		Behältertyp         & Beschreibung                                                                                                                       \\
+		\hline
+		\hline
+		\multicolumn{2}{c}{Vererbung von \emph{AbstactCollection}(Interface Collection) }                                                                        \\
+		\hline
+		\multicolumn{2}{c}{Vererbung von \emph{AbstractList}(Interface List)}                                                                                    \\
+		\hline
+		\textbf{ArrayList}  & Dynamisches Array, das hinten offen ist und schnellen direkten Zugriff ermöglicht                                                  \\
+		\hline
+		\textbf{Vector}     & Dynamisches Array, das hinten offen ist und schnellen direkten Zugriff ermöglicht, aber synchronisiert ist                         \\
+		\hline
+		\textbf{LinkedList} & Einfach verkettete Liste, die schnelle Einfüge- und Löschoperationen ermöglicht, aber keinen schnellen Zugriff auf Elemente bietet \\
+		\hline
+		\multicolumn{2}{c}{Vererbung von \emph{AbstractSet}(Interface Set)}                                                                                      \\
+		\hline
+		\textbf{HashSet}    & Implementierung einer Menge mit schneller Suche, Einfügen und Löschen                                                              \\
+		\hline
+		\textbf{TreeSet}    & Implementierung einer Menge, die Elemente in sortierter Reihenfolge speichert                                                      \\
+		\hline
+		\hline
+		\multicolumn{2}{c}{Vererbung von \emph{AbstractMap}(Interface Map)}                                                                                      \\
+		\hline
+		\textbf{HashMap}    & Implementierung einer Map, die Schlüssel-Wert-Paare speichert und schnellen Zugriff auf die Werte ermöglicht                       \\
+		\hline
+		\textbf{TreeMap}    & Implementierung einer Map, die Schlüssel-Wert-Paare speichert und die Einträge in sortierter Reihenfolge hält                      \\
+	\end{tabular}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{ p{4cm} | p{11cm} }
+		Algorithmus                   & Beschreibung                                                                                                                             \\
+		\hline
+		\textbf{min} und \textbf{max} & Finden des minimalen oder maximalen Wertes in einer Collection, die Comparable implementiert oder ein Comparator angegeben ist           \\
+		\hline
+		\textbf{sort}                 & Sortiert die Elemente einer Collection in aufsteigender Reihenfolge, wenn Comparable implementiert ist oder ein Comparator angegeben ist \\
+		\hline
+		\textbf{binarySearch}         & Sucht ein Element in einer sortierten Collection, die Comparable implementiert oder ein Comparator angegeben ist                         \\
+		\hline
+		\textbf{reverse}              & Kehrt die Reihenfolge der Elemente in einer Collection um                                                                                \\
+	\end{tabular}
+\end{table}
+
 \section{Softwaremuster}
 \subsection{OOP}
 \subsection{Gang of 4}
@@ -326,7 +496,7 @@ Davon können beliebig viele verwendet werden.
 \subsection{Composite}
 
 \pagebreak
-\section{Syntaxvergleich}
+\section{Syntaxvergleich}\label{sec:syntaxvergleich}
 Um den Syntax von C++ und Java zu vergleichen, hab ich ein kleines Beispielprogramm geschrieben mit:
 \begin{itemize}
 	\item einem Interface
@@ -358,16 +528,15 @@ Um den Syntax von C++ und Java zu vergleichen, hab ich ein kleines Beispielprogr
 \inputminted{java}{java/src/main/java/javademo/Demo.java}
 \pagebreak
 
-% C# kommt nicht zur Klausur
-% \subsection{C\#}
-% \subsubsection{Interface}
-% \inputminted{csharp}{csharp/IInterface.cs}
-% \subsubsection{Basisklasse}
-% \inputminted{csharp}{csharp/Baseclass.cs}
-% \subsubsection{Abgeleitete Klasse}
-% \inputminted{csharp}{csharp/Derivedclass.cs}
-% \subsubsection{Main}
-% \inputminted{csharp}{csharp/Program.cs}
-% \pagebreak
+\subsection{C\# kommt nicht zur Klausur - hab ich zu spät gesehen}
+\subsubsection{Interface}
+\inputminted{csharp}{csharp/IInterface.cs}
+\subsubsection{Basisklasse}
+\inputminted{csharp}{csharp/Baseclass.cs}
+\subsubsection{Abgeleitete Klasse}
+\inputminted{csharp}{csharp/Derivedclass.cs}
+\subsubsection{Main}
+\inputminted{csharp}{csharp/Program.cs}
+\pagebreak
 
 \end{document}
