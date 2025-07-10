@@ -489,11 +489,70 @@ anzuwenden, ohne eine Schleife zu verwenden.\footnote{Worse Linq}
 \end{table}
 
 \section{Softwaremuster}
-\subsection{OOP}
-\subsection{Gang of 4}
-\subsection{MVC}
-\subsection{Iterator}
-\subsection{Composite}
+\subsection{Idioms}
+
+Ein Idiom ist ein sehr einfaches Muster das häufig für spezifische Sprachen und Probleme verwendet wird. Beispiele sind
+\textbf{Smart Pointer} in C++ oder \textbf{Properties} in C++, Java und C\#.
+
+\subsection{MVC - Model-View-Controller}
+
+Graphische Oberflächen bestehen aus drei Teilen:
+\begin{itemize}
+	\item \textbf{Model} - Das Model enthält die Daten und die Logik
+	\item \textbf{View} - Die View ist die grafische Darstellung der Daten
+	\item \textbf{Controller} - Der Controller ist die Schnittstelle zwischen Model und View.
+\end{itemize}
+
+Dadurch sind View und Model voneinander getrennt, was die Wartbarkeit und Testbarkeit
+erhöht. Der Controller kann auch mehrere Views bedienen, was die Wiederverwendbarkeit erhöht
+und die Views können unabhängig vom Model entwickelt werden.
+
+\subsection{Liskovsches Substituionsprinzip (LSP)}
+Das Liskovsches Substituionsprinzip besagt, dass eine abgeleitete Klasse überall dort verwendet werden kann,
+wo die Basisklasse verwendet wird, ohne dass das Verhalten des Programms verändert wird.
+Das bedeutet, dass die abgeleitete Klasse alle Methoden der Basisklasse implementieren muss und das Verhalten der Methoden
+nicht verändert werden darf. Es dürfen nur neue Methoden hinzugefügt werden, die das Verhalten der Basisklasse erweitern.
+
+\subsection{OOP Prinzipien}
+
+\begin{itemize}
+	\item \textbf{Program to an interface, not an implementation} - Interfaces sind wichtiger als die Implementierung, da man diese austauschen kann. Algorithmen sollten nicht auf konkrete Implementierungen angewiesen sein, sondern auf Interfaces.
+	\item \textbf{Favor composition over inheritance} - Vererbung ist nicht immer die beste Lösung, da sie zu einer engen Kopplung zwischen Klassen führt. Stattdessen sollte man Komposition verwenden, um flexiblere und wiederverwendbare Komponenten zu erstellen.
+	\item \textbf{Delegate wherever possible} - Delegation ist eine Form der Komposition, bei der eine Klasse die Verantwortung für bestimmte Aufgaben an eine andere Klasse delegiert. Dadurch wird die Verantwortung auf mehrere Klassen verteilt und die Wartbarkeit erhöht.
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/muster_1.png}
+	\caption{Vererbung vs Komposition}
+\end{figure}
+
+
+\subsection{Gang of Four}
+
+Die Gang of Four(GOF) ist eine Gruppe von 4 Autoren, die 1994 ein Buch über Design Patterns veröffentlicht haben.
+(Richard Helm, Ralph Johnson, John Vlissides und Erich Gamma) Sie unterteilen Muster in 4 Teile:
+\begin{itemize}
+	\item \textbf{Name} - Ein oder zwei Worte, die das Muster beschreiben
+	\item \textbf{Problem} - Eine kurze Beschreibung des Problems, das das Muster löst
+	\item \textbf{Lösung} - Eine kurze Beschreibung der Lösung, die das Muster bietet
+	\item \textbf{Konsequenzen} - Eine kurze Beschreibung der Konsequenzen, die das Muster hat(pros und cons)
+\end{itemize}
+
+Die GOF unterteilen Muster in 3 Kategorien:
+\begin{itemize}
+	\item \textbf{Erzeugungsmuster} - Muster, die die Erzeugung von Objekten betreffen
+	\item \textbf{Strukturmuster} - Muster, die die Struktur von Klassen und Objekten betreffen. Es wird zwischen Klassen- und Objektstrukturmustern unterschieden.
+	\item \textbf{Verhaltensmuster} - Muster, die das Verhalten von Klassen und Objekten betreffen. Beschreiben die Dynamik des Zusammenwirkens.
+\end{itemize}
+
+\subsubsection{Erzeugungsmuster}
+\subsubsection{Strukturmuster}
+\subsubsection{Verhaltensmuster}
+
+\subsection{Weitere Arten von Mustern}
+
+\subsection{Softwarearchitektur}
 
 \pagebreak
 \section{Syntaxvergleich}\label{sec:syntaxvergleich}
