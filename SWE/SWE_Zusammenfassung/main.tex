@@ -546,13 +546,207 @@ Die GOF unterteilen Muster in 3 Kategorien:
 	\item \textbf{Verhaltensmuster} - Muster, die das Verhalten von Klassen und Objekten betreffen. Beschreiben die Dynamik des Zusammenwirkens.
 \end{itemize}
 
-\subsubsection{Erzeugungsmuster}
-\subsubsection{Strukturmuster}
-\subsubsection{Verhaltensmuster}
+\subsection{Erzeugungsmuster}
+
+\subsubsection{Abstract Factory oder Kit}
+
+Eine abstracte Schnittstelle, die eine Familie von verwandten oder abhängigen Objekten erstellt, ohne Angabe der konkreten Klassen.
+
+Dadurch kann man zum Beispiel verschiedene GUI-Elemente für verschiedene Plattformen erstellen, ohne dass der Code
+für die GUI-Elemente geändert werden muss. Eine konkrete Factory liefert dann die konkreten Objekte die verwendet werden sollen.
+
+Ist anwendbar, wenn ein System unabhängig von der Art der Objekte sein soll, es aber Konfigurationen gibt, die unterschiedliche Arten von Objekten benötigen.
+
+Konsequenzen sind die Isolation von konkreten Klassen von Anwendungen, die Austauschbarkeit von Produktfamilien, die Förderung von Konsistenz und
+eine erschwerte Erweiterbarkeit von Produktfamilien, da die Factory angepasst werden muss.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/muster_2.png}
+	\caption{Abstract Factory}
+\end{figure}
+
+\subsubsection{Builder}
+
+Trennung der Erzeugung eines komplexen Objekts von seiner Darstellung, sodass der gleiche Erzeugungsprozess verschiedene Darstellungen erzeugen kann.
+
+\subsubsection{Factory Method oder Virtual Constructor}
+
+Eine abstrakte Factory Method ist eine Methode, die ein Objekt erstellt, aber nicht angibt, welches Objekt erstellt wird. Dadurch kann ein abgeleitetes
+Objekt erst das konkrete Objekt erstellen.
+
+Beispielweise werden Iteratoren in vielen Programmiersprachen mit einer Factory Method erstellt. In der Basisklasse wird ein abstrakter Iterator deklariert
+und in der abgeleiteten Klasse wird die Factory Method implementiert, die den konkreten Iterator(z.B. ListIterator) erstellt.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/muster_3.png}
+	\caption{Factory Method}
+\end{figure}
+
+\subsubsection{Prototype}
+
+Ein Prototyp ist ein Objekt, das als Vorlage für die Erstellung neuer Objekte dient. Neue Objekte werden durch Kopieren des Prototyps erstellt,
+anstatt sie von Grund auf neu zu erstellen.
+
+\subsubsection{Singleton}
+
+Klasse von der es nur eine Instanz gibt, die über eine statische Methode abgerufen werden kann.
+
+Probleme mit Singletons sind die unübliche Erzeugung und dass sie nie freigegeben werden dürfen, da sie sonst nicht mehr verfügbar sind. Daher gibt
+es die Alternative eine \textbf{Monostate} Klasse zu verwenden, die mehrere Instanzen erlaubt, aber alle Instanzen den gleichen Zustand haben.
+
+\subsection{Strukturmuster}
+
+\subsubsection{Adapter oder Wrapper}
+
+Konvertierung einer Schnittestelle in eine andere, die der Client erwartet. Dadurch kann eine Klasse mit einer inkompatiblen Schnittstelle verwendet werden.
+
+Beispielweise kann eine Textbox als Shape dargestellt werden um die Kompatibilität mit einer Grafikbibliothek zu gewährleisten.
+
+Verwendet wird das Muster, wenn eine Klasse mit einer inkompatiblen Schnittstelle verwendet werden soll, ohne die Klasse zu ändern.
+
+In Java ist Integer ein Adapter für int, da es eine Klasse ist, die einen int-Wert kapselt und man dadurch int werte als Objekte verwenden kann.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/muster_4.png}
+	\includegraphics[width=0.8\textwidth]{images/muster_5.png}
+	\caption{Adapter}
+\end{figure}
+
+\subsubsection{Bridge}
+
+Trennung der Abstraktion von der Implementierung, sodass beide unabhängig voneinander variiert werden können.
+
+\subsubsection{Composite}
+
+Ein Composite wird genutzt um einen Baumstruktur zu modellieren, in der Knoten sowohl Blätter als auch andere Knoten sein können.
+Es wird eine gemeinsame Schnittstelle für Blätter und Knoten definiert, sodass der Client nicht zwischen Blättern und Knoten unterscheiden muss.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/muster_6.png}
+	\caption{Composite}
+\end{figure}
+
+Ich weiß nicht warum darauf so viel eingegangen wird, da es ein recht einfaches Muster ist.
+
+\subsubsection{Decorator oder Wrapper}
+
+Zusätzliche Funktionalität zu einem Objekt hinzufügen, ohne die Klasse des Objekts zu ändern.
+
+\subsubsection{Facade}
+
+Einheitliche Schnittstelle für eine Gruppe von Klassen, die eine vereinfachte Schnittstelle für komplexe Systeme bereitstellt.
+
+\subsubsection{Flyweight oder Shared Object}
+
+Ein Flyweight ist ein Objekt, das gemeinsam genutzt wird, um den Speicherverbrauch zu reduzieren.
+Es wird verwendet, wenn viele Objekte mit ähnlichen Eigenschaften erstellt werden müssen.
+
+\subsubsection{Proxy}
+
+Ein Platzhalter für ein anderes Objekt, das den Zugriff auf das andere Objekt kontrolliert.
+
+\subsection{Verhaltensmuster}
+
+\subsubsection{Chain of Responsibility}
+
+Trennung zwischen Sender und Empfänger, sodass der Sender nicht weiß, wer der Empfänger ist.
+Der Sender sendet eine Anfrage an einen Handler, der die Anfrage entweder verarbeitet oder an den nächsten Handler in der Kette weiterleitet.
+Dadurch kann die Kette von Handlern dynamisch geändert werden, ohne dass der Sender geändert werden muss.
+
+\subsubsection{Command}
+
+Kapselung einer Anfrage als Objekt, sodass Parameter an Methoden übergeben werden können, die die Anfrage ausführen.
+Dadurch kann die Anfrage in einer Warteschlange gespeichert, rückgängig gemacht oder protokolliert werden.
+
+\subsubsection{Interpreter}
+
+Ein Interpreter ist ein Muster, das eine Sprache mit einer Grammatik definiert und einen Interpreter implementiert, der die Sprache ausführt.
+
+\subsubsection{Iterator}
+
+Auf Iteratoren wurde bereits im STL Kapitel eingegangen.
+
+\subsubsection{Mediator}
+
+Ein Mediator ist ein Objekt, das die Kommunikation zwischen mehreren Objekten koordiniert, ohne dass die Objekte direkt miteinander kommunizieren.
+Dadurch wird die Kopplung zwischen den Objekten reduziert und die Wartbarkeit erhöht.
+
+\subsubsection{Memento}
+
+Ein Memento ist ein Objekt, das den Zustand eines Objekts zu einem bestimmten Zeitpunkt speichert, sodass der Zustand später wiederhergestellt werden kann.
+Das Memento-Muster wird verwendet, um den Zustand eines Objekts zu speichern, ohne dass das Objekt selbst den Zustand speichern muss.
+
+\subsubsection{Observer oder Publisher/Subscriber}
+
+Ein Observer ist ein Objekt, das über Änderungen an einem anderen Objekt informiert wird.
+Das Observer-Muster wird verwendet, um eine Eins-zu-viele-Abhängigkeit zwischen Objekten zu definieren, sodass bei einer Änderung des einen Objekts alle abhängigen Objekte benachrichtigt werden.
+Die Observer bekommen beim Update nicht gleich den neuen Zustand, sondern nur eine Benachrichtigung, dass sich etwas geändert hat.
+Sie rufen dann selbst den Zustand des Objekts ab, um die Änderungen zu erhalten.
+
+\subsubsection{State}
+
+Ein State-Muster ermöglicht es einem Objekt, sein Verhalten zu ändern, wenn sich sein interner Zustand ändert.
+Das Objekt wird so behandelt, als hätte es eine andere Klasse. So kann das Verhalten zur Laufzeit geändert werden, ohne dass die Klasse geändert werden muss.
+
+\subsubsection{Strategy}
+
+Ein Strategy-Muster definiert eine Familie von Algorithmen, kapselt sie und macht sie untereinander austauschbar. Wenn Algorithmen gleiche
+Schnittstellen haben, können sie zur Laufzeit ausgetauscht werden, ohne dass der Client-Code geändert werden muss.
+
+\subsubsection{Template Method}
+
+Ein Template Method-Muster definiert das Gerüst eines Algorithmus in einer Methode, während die Unterklassen einige Schritte des Algorithmus implementieren können.
+Das Template Method-Muster ermöglicht es, die Struktur eines Algorithmus zu definieren, während die spezifischen Implementierungen in den Unterklassen erfolgen.
+
+\subsubsection{Visitor}
+
+Operation, die auf die Elemente einer Sammlung anzuwenden ist.
 
 \subsection{Weitere Arten von Mustern}
 
+\begin{itemize}
+	\item Metamuster
+	\item Analysemuster
+	\item Organisationsmuster
+	\item Pädagogische Muster
+	\item Anti-Muster
+\end{itemize}
+
 \subsection{Softwarearchitektur}
+
+Softwarearchitektur beschäftigt sich mit Abstraktion, Zerlegung, Zusammenbau, Stil und Ästhetik von Software.
+
+Das Software Engineering Institut(SEI) an der Carnegie Mellon University führt über 200 weitere Definitionen, bei denen
+die Gemeinsamkeit ist, dass Softwarearchitektur immer nur aus verschiedenen Sichten dargestellt werden kann.
+
+\subsubsection{Sichten in der Softwarearchitektur}
+
+\begin{itemize}
+	\item \textbf{Konzeptuelle-Sicht} - Wie funktioniert das System? Use Cases
+	\item \textbf{Infrastruktur-Sicht} - Wie ist das System aufgebaut? Hardware, Netzwerke, Betriebssysteme
+	\item \textbf{Implementierungs-Sicht} - Wie ist das System implementiert? Programmiersprachen, Frameworks, Bibliotheken
+	\item \textbf{Laufzeit-Sicht} - Wie ist der Ablauf des Systems? Welche Objekte gibt es zur Laufzeit? Wie interagieren sie?
+	\item \textbf{Daten-Sicht} - Welche Daten bearbeitet das System? Von wo kommen sie, welches Format haben sie, wie werden sie gespeichert?
+	\item \textbf{4+1-Sichtenmodell} - Fasst 5 Sichten zusammen um einen Überblick über das System zu geben.
+	      \begin{itemize}
+		      \item \textbf{Logische-Sicht} - Funktion
+		      \item \textbf{Entwicklungs-Sicht} - Statik
+		      \item \textbf{Prozess-Sicht} - Dynamik
+		      \item \textbf{Physische-Sicht} - Hardware
+		      \item \textbf{Szenarien-Sicht} - Use Cases
+	      \end{itemize}
+	\item \textbf{C4-Modell} - Basiert auf dem 4+1-Sichtenmodell und ist im Wesentlichen eine Notationstechnik zur Visualisierung von Softwarearchitektur.
+	      \begin{itemize}
+		      \item \textbf{Context Diagram} - Zeigt das System im Kontext seiner Umgebung, z.B. externe Systeme, Benutzer und Schnittstellen.
+		      \item \textbf{Container Diagram} - Zeigt die Container des Systems, z.B. Webanwendungen, Datenbanken und Microservices.
+		      \item \textbf{Component Diagram} - Zeigt die Komponenten eines Containers, z.B. Klassen, Module und Bibliotheken.
+		      \item \textbf{Code Diagram} - Zeigt die Klassen und deren Beziehungen innerhalb einer Komponente.
+	      \end{itemize}
+\end{itemize}
 
 \pagebreak
 \section{Syntaxvergleich}\label{sec:syntaxvergleich}
